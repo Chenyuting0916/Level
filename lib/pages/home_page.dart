@@ -32,15 +32,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        color: Colors.black,
+        color: Theme.of(context).colorScheme.background,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
           child: GNav(
               selectedIndex: _selectedIndex,
               onTabChange: _navigateBottomBar,
-              backgroundColor: Colors.black,
-              color: Colors.white,
-              activeColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.background,
               gap: 4,
               padding: const EdgeInsets.all(16),
               tabs: const [
