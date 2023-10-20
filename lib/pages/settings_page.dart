@@ -8,14 +8,12 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(child: Text('settings'),
-      
-      ),
+      body: const Text('settings'),
        floatingActionButton: FloatingActionButton(
           onPressed: (){
             Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
     );
   }

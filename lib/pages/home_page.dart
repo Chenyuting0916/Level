@@ -4,6 +4,7 @@ import 'package:level/pages/profile_page.dart';
 import 'package:level/pages/ranking_page.dart';
 import 'package:level/pages/settings_page.dart';
 import 'package:level/pages/timer_page.dart';
+import 'package:localization/localization.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   final List _pages = [
     const ProfilePage(),
@@ -41,22 +42,22 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).colorScheme.background,
               gap: 4,
               padding: const EdgeInsets.all(16),
-              tabs: const [
+              tabs:  [
                 GButton(
                   icon: Icons.person,
-                  text: 'Profile',
+                  text: 'Profile'.i18n(),
                 ),
                 GButton(
                   icon: Icons.access_time_filled,
-                  text: 'Focus',
+                  text: 'Focus'.i18n(),
                 ),
                 GButton(
                   icon: Icons.bar_chart_outlined,
-                  text: 'Ranking',
+                  text: 'Rank'.i18n(),
                 ),
                 GButton(
                   icon: Icons.settings,
-                  text: 'Settings',
+                  text: 'Settings'.i18n(),
                 ),
               ]),
         ),
