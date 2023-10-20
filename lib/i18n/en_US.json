@@ -2,5 +2,8 @@
     "Profile": "Profile",
     "Focus": "Focus",
     "Rank": "Rank",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "LightTheme":"Light Theme",
+    "ChangeLightThemeDescription":"Change to Light Theme",
+    "ChangeLanguage":"Change Language"
 }
