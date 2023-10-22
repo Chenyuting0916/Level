@@ -39,6 +39,7 @@ dependencies:
   flutter_localizations: 
     sdk: flutter
   localization: ^2.1.0
+  avatar_glow: ^2.0.2
 
 dev_dependencies:
   flutter_test:

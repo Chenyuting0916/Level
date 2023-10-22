@@ -29,38 +29,41 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  GNav buildNav() {
+    return GNav(
+        selectedIndex: _selectedIndex,
+        onTabChange: _navigateBottomBar,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        gap: 4,
+        padding: const EdgeInsets.all(16),
+        tabs: [
+          GButton(
+            icon: Icons.person,
+            text: 'Profile'.i18n(),
+          ),
+          GButton(
+            icon: Icons.access_time_filled,
+            text: 'Focus'.i18n(),
+          ),
+          GButton(
+            icon: Icons.bar_chart_outlined,
+            text: 'Rank'.i18n(),
+          ),
+          GButton(
+            icon: Icons.settings,
+            text: 'Settings'.i18n(),
+          ),
+        ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
         color: Theme.of(context).colorScheme.background,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-          child: GNav(
-              selectedIndex: _selectedIndex,
-              onTabChange: _navigateBottomBar,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              gap: 4,
-              padding: const EdgeInsets.all(16),
-              tabs:  [
-                GButton(
-                  icon: Icons.person,
-                  text: 'Profile'.i18n(),
-                ),
-                GButton(
-                  icon: Icons.access_time_filled,
-                  text: 'Focus'.i18n(),
-                ),
-                GButton(
-                  icon: Icons.bar_chart_outlined,
-                  text: 'Rank'.i18n(),
-                ),
-                GButton(
-                  icon: Icons.settings,
-                  text: 'Settings'.i18n(),
-                ),
-              ]),
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+            child: buildNav()),
       ),
       body: _pages[_selectedIndex],
     );

@@ -6,6 +6,7 @@ ThemeData lightMode = ThemeData(
     background: Colors.grey.shade400,
     primary: Colors.grey.shade300,
     secondary: Colors.grey.shade200,
+    tertiary:Colors.black
   )
 );
 
@@ -15,5 +16,6 @@ ThemeData darkMode = ThemeData(
     background: Colors.grey.shade900,
     primary: Colors.grey.shade800,
     secondary: Colors.grey.shade700,
+    tertiary:Colors.white
   )
 );

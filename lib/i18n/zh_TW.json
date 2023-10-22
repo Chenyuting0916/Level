@@ -3,7 +3,8 @@
     "Focus": "專注",
     "Rank": "排行榜",
     "Settings": "設定",
-    "LightTheme":"明亮主題",
-    "ChangeLightThemeDescription":"切換成明亮主題",
-    "ChangeLanguage":"更換語言"
+    "LightTheme": "明亮主題",
+    "ChangeLightThemeDescription": "切換成明亮主題",
+    "ChangeLanguage": "更換語言",
+    "StartFocus": "開始專注"
 }

@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Row(
               children: [
                 const Icon(Icons.settings),
-                const SizedBox(width: 10),
+                const SizedBox(width: 8),
                 Text(
                   "Settings".i18n(),
                   style: const TextStyle(
@@ -51,40 +51,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 'ChangeLightThemeDescription'.i18n(),
               ),
 
-              // tileColor: FlutterFlowTheme.of(context).secondaryBackground,
               activeColor: Theme.of(context).colorScheme.secondary,
               activeTrackColor: Theme.of(context).colorScheme.primary,
             ),
-            DropdownButtonFormField<Locale>(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.language),
-              ),
-              hint: Text('ChangeLanguage'.i18n()),
-              items: Language.all.map(
-                (locale) {
-                  final name = Language.getLocaleName(locale.languageCode);
-
-                  return DropdownMenuItem(
-                    value: locale,
-                    onTap: () {
-                      final provider =
-                          Provider.of<LocaleProvider>(context, listen: false);
-
-                      provider.setLocale(locale);
-                    },
-                    child: Text(
-                      name,
-                    ),
-                  );
-                },
-              ).toList(),
-              onChanged: (Locale? local) {
-                if (local != null) {
-                  Provider.of<LocaleProvider>(context, listen: false)
-                      .setLocale(local);
-                }
-              },
-            ),
+            buildLanguageDropdown(),
           ],
         ),
       ),
@@ -94,6 +64,37 @@ class _SettingsPageState extends State<SettingsPage> {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  DropdownButtonFormField<Locale> buildLanguageDropdown() {
+    return DropdownButtonFormField<Locale>(
+      decoration: const InputDecoration(
+        prefixIcon: Icon(Icons.language),
+      ),
+      hint: Text('ChangeLanguage'.i18n()),
+      items: Language.all.map(
+        (locale) {
+          final name = Language.getLocaleName(locale.languageCode);
+          return DropdownMenuItem(
+            value: locale,
+            onTap: () {
+              final provider =
+                  Provider.of<LocaleProvider>(context, listen: false);
+
+              provider.setLocale(locale);
+            },
+            child: Text(
+              name,
+            ),
+          );
+        },
+      ).toList(),
+      onChanged: (Locale? local) {
+        if (local != null) {
+          Provider.of<LocaleProvider>(context, listen: false).setLocale(local);
+        }
+      },
     );
   }
 }

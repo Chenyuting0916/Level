@@ -3,7 +3,8 @@
     "Focus": "Focus",
     "Rank": "Rank",
     "Settings": "Settings",
-    "LightTheme":"Light Theme",
-    "ChangeLightThemeDescription":"Change to Light Theme",
-    "ChangeLanguage":"Change Language"
+    "LightTheme": "Light Theme",
+    "ChangeLightThemeDescription": "Change to Light Theme",
+    "ChangeLanguage": "Change Language",
+    "StartFocus": "Start Focus"
 }
