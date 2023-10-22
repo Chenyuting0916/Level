@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:level/classes/language.dart';
 import 'package:level/providers/locale_provider.dart';
-import 'package:level/theme/theme_provider.dart';
+import 'package:level/providers/theme_provider.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 

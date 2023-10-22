@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:level/api/firebase_api.dart';
+import 'package:level/firebase_options.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/providers/locale_provider.dart';
-import 'package:level/theme/theme_provider.dart';
+import 'package:level/providers/theme_provider.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotifications();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
