@@ -1,6 +1,6 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:level/components/timer_category.dart';
+import 'package:level/pages/timer_category_page.dart';
 import 'package:localization/localization.dart';
 
 class AnimatedButton extends StatelessWidget {

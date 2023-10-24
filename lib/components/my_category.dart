@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/my_timer.dart';
 
 class MyCategory extends StatelessWidget {
   final String categoryName;
@@ -22,7 +23,13 @@ class MyCategory extends StatelessWidget {
             splashFactory: NoSplash.splashFactory,
           ),
           
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, _) {
+                return const MyTimer();
+              },
+            ));
+        },
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
