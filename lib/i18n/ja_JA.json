@@ -13,5 +13,8 @@
     "Mindfulness": "気付きの瞑想",
     "Study": "勉強する",
     "Exercises": "運動/筋トレ",
-    "LongPressToStop": "画面を長押しすると停止します"
+    "LongPressToStop": "画面を長押しすると停止します",
+    "No": "いいえ",
+    "Yes": "はい",
+    "SureToStop": "本当に停止しますか?"
 }

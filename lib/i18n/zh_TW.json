@@ -13,5 +13,8 @@
     "Mindfulness": "正念",
     "Study": "讀書",
     "Exercises": "運動/健身",
-    "LongPressToStop": "長按螢幕來停止"
+    "LongPressToStop": "長按螢幕來停止",
+    "No": "取消",
+    "Yes": "OK",
+    "SureToStop": "確定要停止專注嗎?"
 }

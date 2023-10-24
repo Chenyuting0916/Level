@@ -13,5 +13,8 @@
     "Mindfulness": "Mindfulness",
     "Study": "Study",
     "Exercises": "Exercises",
-    "LongPressToStop": "Long Press To Stop"
+    "LongPressToStop": "Long Press To Stop",
+    "No": "No",
+    "Yes": "Yes",
+    "SureToStop": "Are you sure you want to stop?"
 }
