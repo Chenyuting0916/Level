@@ -6,5 +6,11 @@
     "LightTheme": "ライトテーマ",
     "ChangeLightThemeDescription": "ライトテーマに変換する",
     "ChangeLanguage": "他の言語に変更する",
-    "StartFocus": "集中する"
+    "StartFocus": "集中する",
+    "Code": "コーディング",
+    "Work": "働く",
+    "Art": "美術",
+    "Mindfulness": "気付きの瞑想",
+    "Study": "勉強する",
+    "Exercises": "運動/筋トレ"
 }

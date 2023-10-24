@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     const ProfilePage(),
     const TimerPage(),
     const RankingPage(),
-    const SettingsPage()
+    const SettingsPage(),
   ];
 
   void _navigateBottomBar(int index) {

@@ -6,5 +6,11 @@
     "LightTheme": "Light Theme",
     "ChangeLightThemeDescription": "Change to Light Theme",
     "ChangeLanguage": "Change Language",
-    "StartFocus": "Start Focus"
+    "StartFocus": "Start Focus",
+    "Code": "Code",
+    "Work": "Work",
+    "Art": "Art",
+    "Mindfulness": "Mindfulness",
+    "Study": "Study",
+    "Exercises": "Exercises"
 }

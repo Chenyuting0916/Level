@@ -6,5 +6,11 @@
     "LightTheme": "明亮主題",
     "ChangeLightThemeDescription": "切換成明亮主題",
     "ChangeLanguage": "更換語言",
-    "StartFocus": "開始專注"
+    "StartFocus": "開始專注",
+    "Code": "寫程式",
+    "Work": "工作",
+    "Art": "藝術相關",
+    "Mindfulness": "正念",
+    "Study": "讀書",
+    "Exercises": "運動/健身"
 }
