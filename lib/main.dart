@@ -46,7 +46,9 @@ class MyApp extends StatelessWidget {
       ],
       locale: Provider.of<LocaleProvider>(context).locale,
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const HomePage(
+        selectedIndex: 1,
+      ),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

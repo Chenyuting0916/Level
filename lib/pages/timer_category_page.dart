@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_category.dart';
 import 'package:localization/localization.dart';
 
@@ -8,13 +9,11 @@ class TimerCategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          color: Theme.of(context).colorScheme.tertiary,
-        ),
-        titleTextStyle:
-            TextStyle(color: Theme.of(context).colorScheme.tertiary),
-        title: Text("StartFocus".i18n()),
+      appBar: MyAppbar(
+        appbarTitle: "StartFocus".i18n(),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       body: ListView(
         padding: const EdgeInsets.all(25),

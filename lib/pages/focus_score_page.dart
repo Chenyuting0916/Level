@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:level/components/all_status.dart';
+import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
+import 'package:level/pages/home_page.dart';
 import 'package:localization/localization.dart';
 
 class FocusScorePage extends StatefulWidget {
@@ -16,6 +18,16 @@ class _FocusScorePageState extends State<FocusScorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppbar(
+        appbarTitle: "BackToProfile".i18n(),
+        onPressed: () {
+          Navigator.of(context).push(PageRouteBuilder(
+            pageBuilder: (context, animation, _) {
+              return const HomePage(selectedIndex: 0);
+            },
+          ));
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
         child: ListView(children: [

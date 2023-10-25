@@ -7,7 +7,8 @@ import 'package:level/pages/timer_page.dart';
 import 'package:localization/localization.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int selectedIndex;
+  const HomePage({super.key, required this.selectedIndex});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,6 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
 
   final List _pages = [
     const ProfilePage(),

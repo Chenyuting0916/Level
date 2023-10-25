@@ -46,8 +46,11 @@ class MyStatus extends StatelessWidget {
   }
 
   Widget buildIncreasedIcon() {
-
-    if(increased == '') return const SizedBox(width: 25,);
+    if (increased == '') {
+      return const SizedBox(
+        width: 25
+      );
+    }
     return Column(
       children: [
         const SizedBox(
