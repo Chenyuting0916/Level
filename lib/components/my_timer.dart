@@ -69,11 +69,15 @@ class _MyTimerState extends State<MyTimer> {
   void openDialog() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            title: Text("SureToStop".i18n(),
-            style: TextStyle(fontSize: 18),),
+            title: Text(
+              "SureToStop".i18n(),
+              style: const TextStyle(fontSize: 18),
+            ),
             actions: [
               MyButton(
-                  buttonText: "Yes".i18n(),
+                  buttonBackgroundColor:
+                      Theme.of(context).colorScheme.secondary,
+                  buttonChild: Text("Yes".i18n()),
                   onPressed: () {
                     Navigator.of(context).push(PageRouteBuilder(
                       pageBuilder: (context, animation, _) {
@@ -82,7 +86,9 @@ class _MyTimerState extends State<MyTimer> {
                     ));
                   }),
               MyButton(
-                  buttonText: "No".i18n(),
+                  buttonBackgroundColor:
+                      Theme.of(context).colorScheme.secondary,
+                  buttonChild: Text("No".i18n()),
                   onPressed: () {
                     Navigator.of(context).pop();
                   }),

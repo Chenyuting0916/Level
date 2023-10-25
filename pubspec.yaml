@@ -42,6 +42,7 @@ dependencies:
   avatar_glow: ^2.0.2
   firebase_core: ^2.19.0
   firebase_messaging: ^14.7.1
+  flutter_animation_progress_bar: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +62,7 @@ dev_dependencies:
 flutter:
   assets:
     - lib/i18n/
+    - lib/assets/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:level/classes/language.dart';
+import 'package:level/components/my_divider.dart';
+import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
 import 'package:localization/localization.dart';
@@ -22,21 +24,8 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
         child: ListView(
           children: [
-            Row(
-              children: [
-                const Icon(Icons.settings),
-                const SizedBox(width: 8),
-                Text(
-                  "Settings".i18n(),
-                  style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const Divider(
-              height: 20,
-              thickness: 1,
-            ),
+            MyTitle(title: "Settings".i18n(),titleIcon: const Icon(Icons.settings)),
+            const MyDevider(),
             SwitchListTile.adaptive(
               value: _isLightMode,
               onChanged: (newValue) async {

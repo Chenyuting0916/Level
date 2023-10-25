@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/my_button.dart';
 import 'package:level/components/my_timer.dart';
 
 class MyCategory extends StatelessWidget {
@@ -15,32 +16,29 @@ class MyCategory extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            foregroundColor: Theme.of(context).colorScheme.tertiary,
-            elevation: 0,
-            splashFactory: NoSplash.splashFactory,
-          ),
-          
-        onPressed: () {
-          Navigator.of(context).push(PageRouteBuilder(
-              pageBuilder: (context, animation, _) {
-                return const MyTimer();
-              },
-            ));
-        },
-        child: Column(
+      child: MyButton(
+        buttonBackgroundColor: Colors.transparent,
+        buttonChild: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             categoryIcon,
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-              child: Text(categoryName, style: const TextStyle(fontSize: 14),),
+              child: Text(
+                categoryName,
+                style: const TextStyle(fontSize: 14),
+              ),
             ),
           ],
         ),
+        onPressed: () {
+          Navigator.of(context).push(PageRouteBuilder(
+            pageBuilder: (context, animation, _) {
+              return const MyTimer();
+            },
+          ));
+        },
       ),
     );
   }
