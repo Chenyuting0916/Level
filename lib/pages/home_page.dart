@@ -65,14 +65,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: Container(
-        color: Theme.of(context).colorScheme.background,
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-            child: buildNav()),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        bottomNavigationBar: Container(
+          color: Theme.of(context).colorScheme.background,
+          child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+              child: buildNav()),
+        ),
+        body: _pages[_selectedIndex],
       ),
-      body: _pages[_selectedIndex],
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_button.dart';
 import 'package:level/pages/focus_score_page.dart';
+import 'package:level/pages/home_page.dart';
 import 'package:localization/localization.dart';
 
 class MyTimer extends StatefulWidget {
@@ -44,22 +46,40 @@ class _MyTimerState extends State<MyTimer> {
     final seconds = toTwoDigits(duration.inSeconds.remainder(60));
     final hours = toTwoDigits(duration.inHours.remainder(60));
 
-    return GestureDetector(
-      onLongPress: () {
-        openDialog();
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
       },
       child: Scaffold(
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("$hours:$minutes:$seconds",
-                  style: const TextStyle(fontSize: 70)),
-              const SizedBox(height: 4),
-              Text("LongPressToStop".i18n(),
-                  style: const TextStyle(fontSize: 12)),
-            ],
+        appBar: MyAppbar(
+            appbarTitle: "",
+            onPressed: () {
+              Navigator.of(context).push(PageRouteBuilder(
+                pageBuilder: (context, animation, _) {
+                  return const HomePage(
+                    selectedIndex: 1,
+                  );
+                },
+              ));
+            }),
+        body: GestureDetector(
+          onLongPress: () {
+            openDialog();
+          },
+          child: Scaffold(
+            body: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("$hours:$minutes:$seconds",
+                      style: const TextStyle(fontSize: 70)),
+                  const SizedBox(height: 4),
+                  Text("LongPressToStop".i18n(),
+                      style: const TextStyle(fontSize: 12)),
+                ],
+              ),
+            ),
           ),
         ),
       ),
