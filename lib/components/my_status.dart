@@ -5,26 +5,33 @@ class MyStatus extends StatelessWidget {
   final String statusName;
   final String increased;
   final String statusValue;
+  final String tooltipMessage;
 
   const MyStatus(
       {super.key,
       required this.statusName,
       required this.statusIcon,
       required this.statusValue,
-      required this.increased});
+      required this.increased,
+      required this.tooltipMessage});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
             children: [
-              Icon(
-                statusIcon,
-                size: 60,
+              Tooltip(
+                message: tooltipMessage,
+                triggerMode: TooltipTriggerMode.tap,
+                margin: const EdgeInsets.only(top: 12),
+                child: Icon(
+                  statusIcon,
+                  size: 60,
+                ),
               ),
               const SizedBox(
                 height: 6,
@@ -47,9 +54,7 @@ class MyStatus extends StatelessWidget {
 
   Widget buildIncreasedIcon() {
     if (increased == '') {
-      return const SizedBox(
-        width: 25
-      );
+      return const SizedBox(width: 25);
     }
     return Column(
       children: [
@@ -60,7 +65,7 @@ class MyStatus extends StatelessWidget {
         Row(
           children: [
             Text(
-              "( $increased",
+              " ( $increased",
               style: const TextStyle(fontSize: 10),
             ),
             const Icon(

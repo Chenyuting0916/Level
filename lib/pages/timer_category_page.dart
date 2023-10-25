@@ -60,6 +60,27 @@ class TimerCategoryPage extends StatelessWidget {
                   )),
             ],
           ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MyCategory(
+                  categoryName: "LearnLanguage".i18n(),
+                  categoryIcon: const Icon(
+                    Icons.language,
+                  )),
+              MyCategory(
+                  categoryName: "StartABusiness".i18n(),
+                  categoryIcon: const Icon(
+                    Icons.business_sharp,
+                  )),
+              MyCategory(
+                  categoryName: "FinancialLiteracy".i18n(),
+                  categoryIcon: const Icon(
+                    Icons.credit_card,
+                  )),
+            ],
+          ),
         ],
       ),
     );

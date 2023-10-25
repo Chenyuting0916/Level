@@ -11,11 +11,15 @@ class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(appbarTitle),
       titleTextStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-      leading:
-          IconButton(icon: const Icon(Icons.arrow_back), onPressed: onPressed),
+      leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+          onPressed: onPressed),
     );
   }
-  
+
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -72,7 +72,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
           ),
           FAProgressBar(
             size: 12,
-            progressColor: Theme.of(context).colorScheme.secondary,
+            progressColor: Theme.of(context).colorScheme.inversePrimary,
             borderRadius: const BorderRadius.all(Radius.circular(4)),
             backgroundColor: Theme.of(context).colorScheme.primary,
             currentValue: 6,

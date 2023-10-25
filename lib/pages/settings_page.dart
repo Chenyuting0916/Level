@@ -24,7 +24,9 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
         child: ListView(
           children: [
-            MyTitle(title: "Settings".i18n(),titleIcon: const Icon(Icons.settings)),
+            MyTitle(
+                title: "Settings".i18n(),
+                titleIcon: const Icon(Icons.settings)),
             const MyDevider(),
             SwitchListTile.adaptive(
               value: _isLightMode,
@@ -39,7 +41,6 @@ class _SettingsPageState extends State<SettingsPage> {
               subtitle: Text(
                 'ChangeLightThemeDescription'.i18n(),
               ),
-
               activeColor: Theme.of(context).colorScheme.secondary,
               activeTrackColor: Theme.of(context).colorScheme.primary,
             ),
@@ -58,8 +59,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   DropdownButtonFormField<Locale> buildLanguageDropdown() {
     return DropdownButtonFormField<Locale>(
-      decoration: const InputDecoration(
-        prefixIcon: Icon(Icons.language),
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.language,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
       ),
       hint: Text('ChangeLanguage'.i18n()),
       items: Language.all.map(
