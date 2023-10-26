@@ -23,7 +23,13 @@ class _FocusScorePageState extends State<FocusScorePage> {
     return FutureBuilder<User?>(
       future: UserService().getCurrentUser(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else if (snapshot.hasData) {
           final user = snapshot.data!;
 
           return WillPopScope(
@@ -120,7 +126,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
             ),
           );
         } else {
-          return const Center(child: Text("DatabaseError"));
+          return Center(child: Text("NoDataFound".i18n()));
         }
       },
     );

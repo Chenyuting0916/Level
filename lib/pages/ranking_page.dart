@@ -14,7 +14,13 @@ class RankingPage extends StatelessWidget {
       body: StreamBuilder<List<User>>(
         stream: UserService().getRankedUsers(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Text("Error: ${snapshot.error}");
+          } else if (snapshot.hasData) {
             final rankedUsers = snapshot.data!;
 
             return Padding(
@@ -38,7 +44,7 @@ class RankingPage extends StatelessWidget {
                       title: "Rank".i18n(),
                       titleIcon: const Icon(Icons.bar_chart_outlined)),
                   const MyDevider(),
-                  Text("DataNotFound".i18n()),
+                  Text("NoDataFound".i18n()),
                 ],
               ),
             );
