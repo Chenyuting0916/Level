@@ -45,6 +45,13 @@ class UserService {
         snapshot.docs.map((doc) => fromJson(doc.data())).toList());
   }
 
+  void updateUser(Map<String, dynamic> updateData) async {
+    String? userId = await _getId();
+    final snapshot = _firestore.collection('users').doc(userId);
+
+    snapshot.update(updateData);
+  }
+
   static User fromJson(Map<String, dynamic> json) => User(
       userId: json['userId'],
       username: json['username'],
