@@ -6,6 +6,7 @@ import 'package:level/firebase_options.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
+import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
+  await UserService().getUser();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(

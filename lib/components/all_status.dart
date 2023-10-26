@@ -9,7 +9,7 @@ class AllStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 36),
-      child: Column(
+      child: Wrap(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

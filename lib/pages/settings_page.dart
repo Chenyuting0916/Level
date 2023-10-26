@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:level/classes/language.dart';
+import 'package:level/models/language.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
