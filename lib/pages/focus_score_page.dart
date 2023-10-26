@@ -13,8 +13,9 @@ import 'package:localization/localization.dart';
 
 class FocusScorePage extends StatefulWidget {
   final int categoryId;
-  final Map<String, dynamic> updateData;
-  const FocusScorePage({super.key, required this.categoryId, required this.updateData});
+  final User oldUser;
+  const FocusScorePage(
+      {super.key, required this.categoryId, required this.oldUser});
 
   @override
   State<FocusScorePage> createState() => _FocusScorePageState();
@@ -89,7 +90,8 @@ class _FocusScorePageState extends State<FocusScorePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Lv. ${user.level}"),
-                      Text("Exp. ${user.exp} / ${Level(level: user.level, currentExp: user.exp).maxExp}"),
+                      Text(
+                          "Exp. ${user.exp} / ${Level(level: user.level, currentExp: user.exp).maxExp}"),
                     ],
                   ),
                   const SizedBox(
@@ -102,9 +104,14 @@ class _FocusScorePageState extends State<FocusScorePage> {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     currentValue: user.exp.toDouble(),
                     animatedDuration: const Duration(milliseconds: 600),
-                    maxValue: Level(level: user.level, currentExp: user.exp).maxExp.toDouble(),
+                    maxValue: Level(level: user.level, currentExp: user.exp)
+                        .maxExp
+                        .toDouble(),
                   ),
-                  AllStatus(user: user, categoryId: widget.categoryId),
+                  AllStatus(
+                      user: user,
+                      categoryId: widget.categoryId,
+                      oldUser: widget.oldUser),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

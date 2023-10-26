@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_dialog.dart';
+import 'package:level/models/user.dart';
 import 'package:level/pages/focus_score_page.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/services/status_service.dart';
@@ -92,13 +93,13 @@ class _MyTimerState extends State<MyTimer> {
       builder: (context) => MyDialog(
           title: "SureToStop".i18n(),
           onYesPressed: () async {
-            dynamic update = await StatusService()
+            User oldUser = await StatusService()
                 .updateStatus(widget.categoryId, duration.inSeconds);
             if (!context.mounted) return;
             Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (context, animation, _) {
                 return FocusScorePage(
-                    categoryId: widget.categoryId, updateData: update);
+                    categoryId: widget.categoryId, oldUser: oldUser);
               },
             ));
           },

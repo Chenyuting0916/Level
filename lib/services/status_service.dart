@@ -4,19 +4,19 @@ import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 
 class StatusService {
-  Future<Map<String, dynamic>> updateStatus(
+  Future<User> updateStatus(
       int categoryId, int learningSeconds) async {
-    User? user = await UserService().getCurrentUser();
+    User? oldUser = await UserService().getCurrentUser();
 
-    Map<String, dynamic> update = {};
+    Map<String, dynamic> updatedData = {};
     if (learningSeconds >= 600) {
-      update.addEntries(updateStatusByCategory(categoryId, user).entries);
+      updatedData.addEntries(updateStatusByCategory(categoryId, oldUser).entries);
     }
-    update["seconds"] = user!.seconds + learningSeconds;
-    update.addEntries(levelUp(user, learningSeconds).entries);
-    UserService().updateUser(update);
+    updatedData["seconds"] = oldUser!.seconds + learningSeconds;
+    updatedData.addEntries(levelUp(oldUser, learningSeconds).entries);
+    UserService().updateUser(updatedData);
 
-    return update;
+    return oldUser;
   }
 
   Map<String, int> levelUp(User user, int learningSeconds) {
@@ -51,6 +51,7 @@ class StatusService {
         };
       case CategoryName.art:
         return {
+          "wisdom": user.wisdom + 1,
           "intelligence": user.intelligence + 3,
           "professionalSkill": user.professionalSkill + 5,
         };
