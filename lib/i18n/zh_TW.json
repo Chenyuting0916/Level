@@ -38,5 +38,6 @@
     "FinancialQuotient": "你離不開錢的，你不學習，遲早會被錢找上",
     "BackToProfile": "回到狀態欄",
     "Result": "Result",
-    "Confirm": "確認"
+    "Confirm": "確認",
+    "TimeSpend": "總學習時間: %s 分鐘"
 }

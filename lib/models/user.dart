@@ -2,6 +2,7 @@ class User {
   final String? userId;
   final String username;
   final int level;
+  final int exp;
   final int strength;
   final int wisdom;
   final int intelligence;
@@ -16,6 +17,7 @@ class User {
       {required this.userId,
       required this.username,
       required this.level,
+      required this.exp,
       required this.strength,
       required this.wisdom,
       required this.intelligence,
@@ -31,6 +33,7 @@ class User {
       "userId": userId,
       "username": username,
       "level": level,
+      "exp" : exp,
       "strength": strength,
       "wisdom": wisdom,
       "intelligence": intelligence,
@@ -42,4 +45,19 @@ class User {
       "seconds": seconds,
     };
   }
+
+    static User fromJson(Map<String, dynamic> json) => User(
+      userId: json['userId'],
+      username: json['username'],
+      level: json['level'],
+      strength: json['strength'],
+      wisdom: json['wisdom'],
+      intelligence: json['intelligence'],
+      vitality: json['vitality'],
+      agility: json['agility'],
+      professionalSkill: json['professionalSkill'],
+      luck: json['luck'],
+      financialQuotient: json['financialQuotient'],
+      seconds: json['seconds'], 
+      exp: json['exp'],);
 }

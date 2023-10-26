@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:level/components/my_status.dart';
+import 'package:level/models/user.dart';
 import 'package:localization/localization.dart';
 
 class AllStatus extends StatelessWidget {
-  const AllStatus({super.key});
+  final User user;
+  const AllStatus({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +19,14 @@ class AllStatus extends StatelessWidget {
               MyStatus(
                 statusName: 'STR'.i18n(),
                 statusIcon: Icons.fitness_center,
-                statusValue: "13",
+                statusValue: "${user.strength}",
                 increased: '3',
                 tooltipMessage: "Strength".i18n(),
               ),
               MyStatus(
                 statusName: 'WIS'.i18n(),
                 statusIcon: Icons.terrain_rounded,
-                statusValue: "10",
+                statusValue: "${user.wisdom}",
                 increased: '',
                 tooltipMessage: "Wisdom".i18n(),
               ),
@@ -36,14 +38,14 @@ class AllStatus extends StatelessWidget {
               MyStatus(
                 statusName: 'INT'.i18n(),
                 statusIcon: Icons.school,
-                statusValue: "10",
+                statusValue: "${user.intelligence}",
                 increased: '',
                 tooltipMessage: "Intelligence".i18n(),
               ),
               MyStatus(
                 statusName: 'VIT'.i18n(),
                 statusIcon: Icons.sentiment_satisfied_outlined,
-                statusValue: "15",
+                statusValue: "${user.vitality}",
                 increased: '5',
                 tooltipMessage: "Vitality".i18n(),
               ),
@@ -55,14 +57,14 @@ class AllStatus extends StatelessWidget {
               MyStatus(
                 statusName: 'AGI'.i18n(),
                 statusIcon: Icons.directions_run_outlined,
-                statusValue: "12",
+                statusValue: "${user.agility}",
                 increased: '2',
                 tooltipMessage: "Agility".i18n(),
               ),
               MyStatus(
                 statusName: 'PS'.i18n(),
                 statusIcon: Icons.trending_up_rounded,
-                statusValue: "10",
+                statusValue: "${user.professionalSkill}",
                 increased: '',
                 tooltipMessage: "ProfessionalSkill".i18n(),
               ),
@@ -74,14 +76,14 @@ class AllStatus extends StatelessWidget {
               MyStatus(
                 statusName: 'LUK'.i18n(),
                 statusIcon: Icons.currency_bitcoin,
-                statusValue: "10",
+                statusValue: "${user.luck}",
                 increased: '',
                 tooltipMessage: "Luck".i18n(),
               ),
               MyStatus(
                 statusName: 'FQ'.i18n(),
                 statusIcon: Icons.attach_money_outlined,
-                statusValue: "10",
+                statusValue: "${user.financialQuotient}",
                 increased: '',
                 tooltipMessage: "FinancialQuotient".i18n(),
               ),

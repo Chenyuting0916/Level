@@ -54,7 +54,7 @@ class RankingPage extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(child: Text(user.level.toString())),
       title: Text(user.username),
-      subtitle: Text("TimeSpend: {$minutes} minutes".i18n()),
+      subtitle: Text("TimeSpend".i18n([minutes]), style: const TextStyle(fontSize: 12),),
     );
   }
 }

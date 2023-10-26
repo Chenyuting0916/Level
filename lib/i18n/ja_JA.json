@@ -38,5 +38,6 @@
     "FinancialQuotient": "Financial Quotient",
     "BackToProfile": "ステータスページに戻る",
     "Result": "Result",
-    "Confirm": "完了"
+    "Confirm": "完了",
+    "TimeSpend": "Time Spend: %s minutes"
 }

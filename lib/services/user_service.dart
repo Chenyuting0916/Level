@@ -17,6 +17,7 @@ class UserService {
           userId: userId,
           username: "user_$rabdomNumber",
           level: 1,
+          exp: 1,
           strength: 10,
           wisdom: 10,
           intelligence: 10,
@@ -36,13 +37,14 @@ class UserService {
     final snapshot = await _firestore.collection('users').doc(userId).get();
 
     if (snapshot.exists) {
-      return fromJson(snapshot.data()!);
+      return User.fromJson(snapshot.data()!);
     }
+    return null;
   }
 
   Stream<List<User>> getRankedUsers() {
     return _firestore.collection('users').snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => fromJson(doc.data())).toList());
+        snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
   }
 
   void updateUser(Map<String, dynamic> updateData) async {
@@ -51,20 +53,6 @@ class UserService {
 
     snapshot.update(updateData);
   }
-
-  static User fromJson(Map<String, dynamic> json) => User(
-      userId: json['userId'],
-      username: json['username'],
-      level: json['level'],
-      strength: json['strength'],
-      wisdom: json['wisdom'],
-      intelligence: json['intelligence'],
-      vitality: json['vitality'],
-      agility: json['agility'],
-      professionalSkill: json['professionalSkill'],
-      luck: json['luck'],
-      financialQuotient: json['financialQuotient'],
-      seconds: json['seconds']);
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();

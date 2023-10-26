@@ -38,5 +38,6 @@
     "FinancialQuotient": "Financial Quotient",
     "BackToProfile": "Back To Profile",
     "Result": "Result",
-    "Confirm": "Confirm"
+    "Confirm": "Confirm",
+    "TimeSpend": "Time Spend: %s minutes"
 }
