@@ -5,8 +5,12 @@ import 'package:level/components/my_timer.dart';
 class MyCategory extends StatelessWidget {
   final String categoryName;
   final Icon categoryIcon;
+  final int categoryId;
   const MyCategory(
-      {super.key, required this.categoryName, required this.categoryIcon});
+      {super.key,
+      required this.categoryName,
+      required this.categoryIcon,
+      required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,9 @@ class MyCategory extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(PageRouteBuilder(
             pageBuilder: (context, animation, _) {
-              return const MyTimer();
+              return MyTimer(
+                categoryId: categoryId,
+              );
             },
           ));
         },

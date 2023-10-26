@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_category.dart';
 import 'package:localization/localization.dart';
+import 'package:level/models/category.dart';
 
 class TimerCategoryPage extends StatelessWidget {
   const TimerCategoryPage({super.key});
@@ -15,74 +16,31 @@ class TimerCategoryPage extends StatelessWidget {
           Navigator.of(context).pop();
         },
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(25),
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyCategory(
-                  categoryName: "Exercises".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.directions_walk_sharp,
-                  )),
-              MyCategory(
-                  categoryName: "Study".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.school,
-                  )),
-              MyCategory(
-                  categoryName: "Mindfulness".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.terrain_rounded,
-                  )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyCategory(
-                  categoryName: "Art".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.bubble_chart,
-                  )),
-              MyCategory(
-                  categoryName: "Work".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.attach_money_rounded,
-                  )),
-              MyCategory(
-                  categoryName: "Code".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.code,
-                  )),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyCategory(
-                  categoryName: "LearnLanguage".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.language,
-                  )),
-              MyCategory(
-                  categoryName: "StartABusiness".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.business_sharp,
-                  )),
-              MyCategory(
-                  categoryName: "FinancialLiteracy".i18n(),
-                  categoryIcon: const Icon(
-                    Icons.credit_card,
-                  )),
-            ],
-          ),
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index) {
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyCategory(
+                  categoryName: Category.all[index + index * 2].name,
+                  categoryIcon: Category.all[index + index * 2].icon,
+                  categoryId: Category.all[index + index * 2].id,
+                ),
+                MyCategory(
+                  categoryName: Category.all[index + 1 + index * 2].name,
+                  categoryIcon: Category.all[index + 1 + index * 2].icon,
+                  categoryId: Category.all[index + 1 + index * 2].id,
+                ),
+                MyCategory(
+                  categoryName: Category.all[index + 2 + index * 2].name,
+                  categoryIcon: Category.all[index + 2 + index * 2].icon,
+                  categoryId: Category.all[index + 2 + index * 2].id,
+                ),
+              ],
+            );
+          }),
     );
   }
 }
