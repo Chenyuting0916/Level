@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
-  await UserService().getUser();
+  await UserService().createUserIfNotExist();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(

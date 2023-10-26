@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:level/models/user.dart';
@@ -8,33 +9,55 @@ class UserService {
 
   createUserIfNotExist() async {
     String? userId = await _getId();
-    // dynamic userInDb = await _firestore.collection("users").doc(userId).get();
-    // print(userId);
-    // print(userInDb.toString());
+    final snapshot = await _firestore.collection('users').doc(userId).get();
 
-    // if(userInDb != null) return;
+    if (!snapshot.exists) {
+      String rabdomNumber = Random().nextInt(1000).toString();
+      User user = User(
+          userId: userId,
+          username: "user_$rabdomNumber",
+          level: 1,
+          strength: 10,
+          wisdom: 10,
+          intelligence: 10,
+          vitality: 10,
+          agility: 10,
+          professionalSkill: 10,
+          luck: 10,
+          financialQuotient: 10,
+          seconds: 0);
 
-    User user = User(
-        userId: userId,
-        username: "username",
-        level: 1,
-        strength: 10,
-        wisdom: 10,
-        intelligence: 10,
-        vitality: 10,
-        agility: 10,
-        professionalSkill: 10,
-        luck: 10,
-        financialQuotient: 10,
-        seconds: 0);
-
-    await _firestore.collection("users").doc(userId).set(user.toMap());
+      await _firestore.collection("users").doc(userId).set(user.toMap());
+    }
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUser() async {
-    dynamic aaa = await _firestore.collection("users").doc(await _getId()).get();
-    return await _firestore.collection("users").doc(await _getId()).get();
+  Future<User?> getCurrentUser() async {
+    String? userId = await _getId();
+    final snapshot = await _firestore.collection('users').doc(userId).get();
+
+    if (snapshot.exists) {
+      return fromJson(snapshot.data()!);
+    }
   }
+
+  Stream<List<User>> getRankedUsers() {
+    return _firestore.collection('users').snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => fromJson(doc.data())).toList());
+  }
+
+  static User fromJson(Map<String, dynamic> json) => User(
+      userId: json['userId'],
+      username: json['username'],
+      level: json['level'],
+      strength: json['strength'],
+      wisdom: json['wisdom'],
+      intelligence: json['intelligence'],
+      vitality: json['vitality'],
+      agility: json['agility'],
+      professionalSkill: json['professionalSkill'],
+      luck: json['luck'],
+      financialQuotient: json['financialQuotient'],
+      seconds: json['seconds']);
 
   Future<String?> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
