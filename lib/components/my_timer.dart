@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:level/components/my_appbar.dart';
-import 'package:level/components/my_button.dart';
+import 'package:level/components/my_dialog.dart';
 import 'package:level/pages/focus_score_page.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/services/status_service.dart';
@@ -56,17 +55,11 @@ class _MyTimerState extends State<MyTimer> {
         appBar: MyAppbar(
             appbarTitle: "",
             onPressed: () {
-              Navigator.of(context).push(PageRouteBuilder(
-                pageBuilder: (context, animation, _) {
-                  return const HomePage(
-                    selectedIndex: 1,
-                  );
-                },
-              ));
+              openMissClickDialog();
             }),
         body: GestureDetector(
           onLongPress: () {
-            openDialog();
+            openLongPressDialog();
           },
           child: Scaffold(
             body: Center(
@@ -88,34 +81,36 @@ class _MyTimerState extends State<MyTimer> {
     );
   }
 
-  void openDialog() => showDialog(
+  void openLongPressDialog() => showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-            title: Text(
-              "SureToStop".i18n(),
-              style: const TextStyle(fontSize: 18),
-            ),
-            actions: [
-              MyButton(
-                  buttonBackgroundColor:
-                      Theme.of(context).colorScheme.secondary,
-                  buttonChild: Text("Yes".i18n()),
-                  onPressed: () {
-                    StatusService()
-                        .updateStatus(widget.categoryId, duration.inSeconds);
-                    Navigator.of(context).push(PageRouteBuilder(
-                      pageBuilder: (context, animation, _) {
-                        return const FocusScorePage();
-                      },
-                    ));
-                  }),
-              MyButton(
-                  buttonBackgroundColor:
-                      Theme.of(context).colorScheme.secondary,
-                  buttonChild: Text("No".i18n()),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
-            ],
-          ));
+      builder: (context) => MyDialog(
+          title: "SureToStop".i18n(),
+          onYesPressed: () {
+            StatusService().updateStatus(widget.categoryId, duration.inSeconds);
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, _) {
+                return FocusScorePage(categoryId: widget.categoryId);
+              },
+            ));
+          },
+          onNoPressed: () {
+            Navigator.of(context).pop();
+          }));
+
+  void openMissClickDialog() => showDialog(
+      context: context,
+      builder: (context) => MyDialog(
+          title: "SureToStopWithoutExp".i18n(),
+          onYesPressed: () {
+            Navigator.of(context).push(PageRouteBuilder(
+              pageBuilder: (context, animation, _) {
+                return const HomePage(
+                  selectedIndex: 1,
+                );
+              },
+            ));
+          },
+          onNoPressed: () {
+            Navigator.of(context).pop();
+          }));
 }

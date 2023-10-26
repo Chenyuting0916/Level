@@ -11,7 +11,8 @@ import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 
 class FocusScorePage extends StatefulWidget {
-  const FocusScorePage({super.key});
+  final int categoryId;
+  const FocusScorePage({super.key, required this.categoryId});
 
   @override
   State<FocusScorePage> createState() => _FocusScorePageState();
@@ -101,7 +102,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
                     animatedDuration: const Duration(milliseconds: 600),
                     maxValue: 10,
                   ),
-                  AllStatus(user: user),
+                  AllStatus(user: user, categoryId: widget.categoryId),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

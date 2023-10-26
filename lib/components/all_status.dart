@@ -5,7 +5,8 @@ import 'package:localization/localization.dart';
 
 class AllStatus extends StatelessWidget {
   final User user;
-  const AllStatus({super.key, required this.user});
+  final int? categoryId;
+  const AllStatus({super.key, required this.user, this.categoryId});
 
   @override
   Widget build(BuildContext context) {

@@ -48,12 +48,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-        },
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
