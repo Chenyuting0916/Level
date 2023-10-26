@@ -26,6 +26,12 @@ class _MyTimerState extends State<MyTimer> {
     startTimer();
   }
 
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
   void startTimer() {
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
@@ -85,11 +91,14 @@ class _MyTimerState extends State<MyTimer> {
       context: context,
       builder: (context) => MyDialog(
           title: "SureToStop".i18n(),
-          onYesPressed: () {
-            StatusService().updateStatus(widget.categoryId, duration.inSeconds);
+          onYesPressed: () async {
+            dynamic update = await StatusService()
+                .updateStatus(widget.categoryId, duration.inSeconds);
+            if (!context.mounted) return;
             Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (context, animation, _) {
-                return FocusScorePage(categoryId: widget.categoryId);
+                return FocusScorePage(
+                    categoryId: widget.categoryId, updateData: update);
               },
             ));
           },

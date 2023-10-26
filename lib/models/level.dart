@@ -1,11 +1,11 @@
 class Level {
   final int level;
-  final int maxExp;
+  late int maxExp = getMaxExp();
   final int currentExp;
 
-  List levelExpList = [
+  static List levelExpList = [
+    5,
     10,
-    14,
     18,
     22,
     26,
@@ -22,5 +22,11 @@ class Level {
     100,
     120
   ];
-  Level({required this.level, required this.maxExp, required this.currentExp});
+
+  int getMaxExp() {
+    if (level > levelExpList.length - 1) return 120;
+    return levelExpList[level - 1];
+  }
+
+  Level({required this.level, required this.currentExp});
 }

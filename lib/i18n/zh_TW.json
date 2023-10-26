@@ -41,5 +41,6 @@
     "Confirm": "確認",
     "TimeSpend": "總學習時間: %s 分鐘",
     "LongerThanTen": "要專注超過10分鐘才會獲得經驗值喔",
-    "NoDataFound": "No Data Found :("
+    "NoDataFound": "No Data Found :(",
+    "SureToStopWithoutExp": "確定要離開嗎？\n(將不會獲得經驗值！！)"
 }

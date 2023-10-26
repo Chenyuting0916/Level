@@ -5,6 +5,7 @@ import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_button.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
+import 'package:level/models/level.dart';
 import 'package:level/models/user.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/services/user_service.dart';
@@ -12,7 +13,8 @@ import 'package:localization/localization.dart';
 
 class FocusScorePage extends StatefulWidget {
   final int categoryId;
-  const FocusScorePage({super.key, required this.categoryId});
+  final Map<String, dynamic> updateData;
+  const FocusScorePage({super.key, required this.categoryId, required this.updateData});
 
   @override
   State<FocusScorePage> createState() => _FocusScorePageState();
@@ -87,7 +89,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Lv. ${user.level}"),
-                      Text("Exp. ${user.exp} / 10"),
+                      Text("Exp. ${user.exp} / ${Level(level: user.level, currentExp: user.exp).maxExp}"),
                     ],
                   ),
                   const SizedBox(
@@ -100,7 +102,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     currentValue: user.exp.toDouble(),
                     animatedDuration: const Duration(milliseconds: 600),
-                    maxValue: 10,
+                    maxValue: Level(level: user.level, currentExp: user.exp).maxExp.toDouble(),
                   ),
                   AllStatus(user: user, categoryId: widget.categoryId),
                   Row(

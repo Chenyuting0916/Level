@@ -1,18 +1,32 @@
 import 'package:level/models/category.dart';
+import 'package:level/models/level.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 
 class StatusService {
-  void updateStatus(int categoryId, int learningSeconds) async {
-    if (learningSeconds < 600) return;
-
+  Future<Map<String, dynamic>> updateStatus(
+      int categoryId, int learningSeconds) async {
     User? user = await UserService().getCurrentUser();
-    dynamic update = updateStatusByCategory(categoryId, user);
+
+    Map<String, dynamic> update = {};
+    if (learningSeconds >= 600) {
+      update.addEntries(updateStatusByCategory(categoryId, user).entries);
+    }
+    update["seconds"] = user!.seconds + learningSeconds;
+    update.addEntries(levelUp(user, learningSeconds).entries);
     UserService().updateUser(update);
-    LevelUp();
+
+    return update;
   }
 
-  void LevelUp() {}
+  Map<String, int> levelUp(User user, int learningSeconds) {
+    int maxExp = Level(level: user.level, currentExp: user.exp).maxExp;
+    int addExp = getAddExp(learningSeconds);
+    if (addExp + user.exp >= maxExp) {
+      return {"level": user.level + 1, "exp": addExp + user.exp - maxExp};
+    }
+    return {"exp": addExp + user.exp};
+  }
 
   Map<String, int> updateStatusByCategory(int categoryId, User? user) {
     if (user == null) return {};
@@ -64,5 +78,10 @@ class StatusService {
       default:
         return {};
     }
+  }
+
+  int getAddExp(int learningSeconds) {
+    int addExp = ((learningSeconds / 1800.0) * 10).toInt();
+    return addExp >= 10 ? 10 : addExp;
   }
 }
