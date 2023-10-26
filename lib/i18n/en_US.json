@@ -39,5 +39,7 @@
     "BackToProfile": "Back To Profile",
     "Result": "Result",
     "Confirm": "Confirm",
-    "TimeSpend": "Time Spend: %s minutes"
+    "TimeSpend": "Time Spend: %s minutes",
+    "LongerThanTen": "You have to focus for more than 10 minutes to gain experience points.",
+    "NoDataFound": "No Data Found :("
 }

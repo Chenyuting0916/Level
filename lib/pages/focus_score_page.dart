@@ -123,6 +123,22 @@ class _FocusScorePageState extends State<FocusScorePage> {
                   )
                 ]),
               ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text(
+                              "LongerThanTen".i18n(),
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ));
+                },
+                child: Icon(
+                  Icons.lightbulb,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+              ),
             ),
           );
         } else {

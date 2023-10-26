@@ -24,17 +24,17 @@ class TimerCategoryPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MyCategory(
-                  categoryName: Category.all[index + index * 2].name,
+                  categoryName: Category.all[index + index * 2].name.i18n(),
                   categoryIcon: Category.all[index + index * 2].icon,
                   categoryId: Category.all[index + index * 2].id,
                 ),
                 MyCategory(
-                  categoryName: Category.all[index + 1 + index * 2].name,
+                  categoryName: Category.all[index + 1 + index * 2].name.i18n(),
                   categoryIcon: Category.all[index + 1 + index * 2].icon,
                   categoryId: Category.all[index + 1 + index * 2].id,
                 ),
                 MyCategory(
-                  categoryName: Category.all[index + 2 + index * 2].name,
+                  categoryName: Category.all[index + 2 + index * 2].name.i18n(),
                   categoryIcon: Category.all[index + 2 + index * 2].icon,
                   categoryId: Category.all[index + 2 + index * 2].id,
                 ),

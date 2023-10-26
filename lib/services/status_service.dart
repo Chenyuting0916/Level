@@ -3,14 +3,12 @@ import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 
 class StatusService {
-
   void updateStatus(int categoryId, int learningSeconds) async {
-    User? user = await UserService().getCurrentUser();
+    if (learningSeconds < 600) return;
 
+    User? user = await UserService().getCurrentUser();
     dynamic update = updateStatusByCategory(categoryId, user);
     UserService().updateUser(update);
-
-    //calculate if need levelup
     LevelUp();
   }
 

@@ -39,5 +39,7 @@
     "BackToProfile": "ステータスページに戻る",
     "Result": "Result",
     "Confirm": "完了",
-    "TimeSpend": "Time Spend: %s minutes"
+    "TimeSpend": "合計学習時間: %s 分",
+    "LongerThanTen": "経験値を獲得するには10分以上集中する必要があります。",
+    "NoDataFound": "No Data Found :("
 }
