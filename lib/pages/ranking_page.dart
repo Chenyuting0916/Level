@@ -52,9 +52,16 @@ class RankingPage extends StatelessWidget {
     final minutes = (user.seconds / 60).toStringAsFixed(2);
 
     return ListTile(
-      leading: CircleAvatar(child: Text(user.level.toString())),
+      leading: CircleAvatar(
+        backgroundColor: Colors.grey[350],
+        foregroundColor: Colors.grey.shade900,
+        child: Text(user.level.toString()),
+      ),
       title: Text(user.username),
-      subtitle: Text("TimeSpend".i18n([minutes]), style: const TextStyle(fontSize: 12),),
+      subtitle: Text(
+        "TimeSpend".i18n([minutes]),
+        style: const TextStyle(fontSize: 12),
+      ),
     );
   }
 }
