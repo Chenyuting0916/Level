@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:level/components/all_status.dart';
 import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_button.dart';
 import 'package:level/components/my_divider.dart';
+import 'package:level/components/my_headshot_username.dart';
+import 'package:level/components/my_level.dart';
 import 'package:level/components/my_title.dart';
-import 'package:level/models/level.dart';
 import 'package:level/models/user.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/services/user_service.dart';
@@ -58,56 +58,11 @@ class _FocusScorePageState extends State<FocusScorePage> {
                       title: "Result".i18n(),
                       titleIcon: const Icon(Icons.show_chart_rounded)),
                   const MyDevider(),
-                  const SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 60,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.tertiary,
-                          child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            radius: 57,
-                            backgroundImage:
-                                const AssetImage('lib/assets/v10.png'),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 18,
-                        ),
-                        Text(
-                          user.username,
-                          style: const TextStyle(fontSize: 24),
-                        ),
-                      ],
-                    ),
+                  MyHeadshotAndUsername(
+                    imageUrl: 'lib/assets/v10.png',
+                    username: user.username,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Lv. ${user.level}"),
-                      Text(
-                          "Exp. ${user.exp} / ${Level(level: user.level, currentExp: user.exp).maxExp}"),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  FAProgressBar(
-                    size: 12,
-                    progressColor: Theme.of(context).colorScheme.inversePrimary,
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    currentValue: user.exp.toDouble(),
-                    animatedDuration: const Duration(milliseconds: 600),
-                    maxValue: Level(level: user.level, currentExp: user.exp)
-                        .maxExp
-                        .toDouble(),
-                  ),
+                  MyLevel(level: user.level, exp: user.exp),
                   AllStatus(
                       user: user,
                       categoryId: widget.categoryId,

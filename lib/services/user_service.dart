@@ -32,6 +32,35 @@ class UserService {
     }
   }
 
+  createTestUser() {
+    String rabdomNumber = Random().nextInt(1000).toString();
+    int rabdomLevel = Random().nextInt(20);
+    int rabdomExp = Random().nextInt(5);
+    int rabdomSeconds = Random().nextInt(800000);
+
+
+
+    User user = User(
+        userId: "TestUserId_$rabdomNumber",
+        username: "test_user_$rabdomNumber",
+        level: rabdomLevel,
+        exp: rabdomExp,
+        strength: 10,
+        wisdom: 10,
+        intelligence: 10,
+        vitality: 10,
+        agility: 10,
+        professionalSkill: 10,
+        luck: 10,
+        financialQuotient: 10,
+        seconds: rabdomSeconds);
+
+    _firestore
+        .collection("users")
+        .doc("TestUserId_$rabdomNumber")
+        .set(user.toMap());
+  }
+
   Future<User?> getCurrentUser() async {
     String? userId = await _getId();
     final snapshot = await _firestore.collection('users').doc(userId).get();

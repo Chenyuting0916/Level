@@ -15,6 +15,9 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
   await UserService().createUserIfNotExist();
+
+  //UserService().createTestUser();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
