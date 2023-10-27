@@ -16,7 +16,7 @@ void main() async {
   await FirebaseApi().initNotifications();
   await UserService().createUserIfNotExist();
 
-  //UserService().createTestUser();
+  // UserService().createTestUser();
 
   runApp(MultiProvider(
     providers: [

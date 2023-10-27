@@ -38,8 +38,6 @@ class UserService {
     int rabdomExp = Random().nextInt(5);
     int rabdomSeconds = Random().nextInt(800000);
 
-
-
     User user = User(
         userId: "TestUserId_$rabdomNumber",
         username: "test_user_$rabdomNumber",
@@ -72,8 +70,13 @@ class UserService {
   }
 
   Stream<List<User>> getRankedUsers() {
-    return _firestore.collection('users').snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+    return _firestore
+        .collection('users')
+        .orderBy("level", descending: true)
+        .limit(10)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
   }
 
   void updateUser(Map<String, dynamic> updateData) async {
