@@ -4,13 +4,13 @@ import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 
 class StatusService {
-  Future<User> updateStatus(
-      int categoryId, int learningSeconds) async {
+  Future<User> updateStatus(int categoryId, int learningSeconds) async {
     User? oldUser = await UserService().getCurrentUser();
 
     Map<String, dynamic> updatedData = {};
     if (learningSeconds >= 600) {
-      updatedData.addEntries(updateStatusByCategory(categoryId, oldUser).entries);
+      updatedData
+          .addEntries(updateStatusByCategory(categoryId, oldUser).entries);
     }
     updatedData["seconds"] = oldUser!.seconds + learningSeconds;
     updatedData.addEntries(levelUp(oldUser, learningSeconds).entries);
@@ -84,5 +84,26 @@ class StatusService {
   int getAddExp(int learningSeconds) {
     int addExp = ((learningSeconds / 1800.0) * 10).toInt();
     return addExp >= 10 ? 10 : addExp;
+  }
+
+  Future<double> averageStatus() async {
+    var user = await UserService().getCurrentUser();
+    int sum = 0;
+    var allStatus = [
+      user!.agility,
+      user.strength,
+      user.intelligence,
+      user.wisdom,
+      user.vitality,
+      user.professionalSkill,
+      user.luck,
+      user.financialQuotient
+    ];
+
+    for (var e in allStatus) {
+      sum += e;
+    }
+
+    return sum / allStatus.length;
   }
 }

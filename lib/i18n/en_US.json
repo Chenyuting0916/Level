@@ -43,5 +43,6 @@
     "LongerThanTen": "You have to focus for more than 10 minutes to gain experience points.",
     "NoDataFound": "No Data Found :(",
     "SureToStopWithoutExp": "Are you sure you want to leave? \n(No experience points will be gained!!)",
-    "LoginDays": "Login Days: %s day"
+    "LoginDays": "Login Days: %s day",
+    "FinishedTasks": "Completed Tasks: %s"
 }

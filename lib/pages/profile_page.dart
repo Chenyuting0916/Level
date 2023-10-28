@@ -1,5 +1,5 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:level/components/my_bar_chart.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_headshot_username.dart';
 import 'package:level/components/my_level.dart';
@@ -79,6 +79,9 @@ class ProfilePage extends StatelessWidget {
                           Text(
                             "LoginDays".i18n([user.loginDays.toString()]),
                           ),
+                          Text(
+                            "FinishedTasks".i18n([user.loginDays.toString()]),
+                          ),
                         ],
                       ),
                     ],
@@ -89,11 +92,7 @@ class ProfilePage extends StatelessWidget {
                   SizedBox(
                     height: 200,
                     child:
-                        BarChart(BarChartData(maxY: 100, minY: 0, barGroups: [
-                      BarChartGroupData(x: 1, barRods: [
-                        BarChartRodData(toY: 66, fromY: 0, color: Colors.amber)
-                      ]),
-                    ])),
+                    MyBarChart(user: user,),
                   ),
                 ],
               ),
