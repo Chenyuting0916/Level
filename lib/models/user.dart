@@ -12,6 +12,8 @@ class User {
   final int luck;
   final int financialQuotient;
   final int seconds;
+  final int loginDays;
+  final DateTime lastLoginDay;
 
   User(
       {required this.userId,
@@ -26,7 +28,9 @@ class User {
       required this.professionalSkill,
       required this.luck,
       required this.financialQuotient,
-      required this.seconds});
+      required this.seconds,
+      required this.loginDays,
+      required this.lastLoginDay});
 
   Map<String, dynamic> toMap() {
     return {
@@ -43,22 +47,25 @@ class User {
       "luck": luck,
       "financialQuotient": financialQuotient,
       "seconds": seconds,
+      "loginDays": loginDays,
+      "lastLoginDay": lastLoginDay
     };
   }
 
   static User fromJson(Map<String, dynamic> json) => User(
-        userId: json['userId'],
-        username: json['username'],
-        level: json['level'],
-        strength: json['strength'],
-        wisdom: json['wisdom'],
-        intelligence: json['intelligence'],
-        vitality: json['vitality'],
-        agility: json['agility'],
-        professionalSkill: json['professionalSkill'],
-        luck: json['luck'],
-        financialQuotient: json['financialQuotient'],
-        seconds: json['seconds'],
-        exp: json['exp'],
-      );
+      userId: json['userId'] ?? '',
+      username: json['username'] ?? '',
+      level: json['level'] ?? 0,
+      strength: json['strength'] ?? 0,
+      wisdom: json['wisdom'] ?? 0,
+      intelligence: json['intelligence'] ?? 0,
+      vitality: json['vitality'] ?? 0,
+      agility: json['agility'] ?? 0,
+      professionalSkill: json['professionalSkill'] ?? 0,
+      luck: json['luck'] ?? 0,
+      financialQuotient: json['financialQuotient'] ?? 10,
+      seconds: json['seconds'] ?? 0,
+      exp: json['exp'] ?? 1,
+      loginDays: json['loginDays'] ?? 1,
+      lastLoginDay: json['lastLoginDay']?.toDate() ?? DateTime.now());
 }

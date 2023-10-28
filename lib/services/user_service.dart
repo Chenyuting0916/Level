@@ -26,7 +26,9 @@ class UserService {
           professionalSkill: 10,
           luck: 10,
           financialQuotient: 10,
-          seconds: 0);
+          seconds: 0,
+          loginDays: 1,
+          lastLoginDay: DateTime.now());
 
       await _firestore.collection("users").doc(userId).set(user.toMap());
     }
@@ -51,7 +53,9 @@ class UserService {
         professionalSkill: 10,
         luck: 10,
         financialQuotient: 10,
-        seconds: rabdomSeconds);
+        seconds: rabdomSeconds,
+        loginDays: 1,
+        lastLoginDay: DateTime.now());
 
     _firestore
         .collection("users")
@@ -96,5 +100,22 @@ class UserService {
       return androidDeviceInfo.androidId;
     }
     return null;
+  }
+
+  updateLoginDay() async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    User? user = await getCurrentUser();
+    var last = DateTime(
+      user!.lastLoginDay.year,
+      user.lastLoginDay.month,
+      user.lastLoginDay.day,
+    );
+
+    if (last == today) return;
+
+    updateUser(
+        {"lastLoginDay": DateTime.now(), "loginDays": user.loginDays + 1});
   }
 }

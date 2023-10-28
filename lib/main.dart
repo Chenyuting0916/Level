@@ -17,6 +17,7 @@ void main() async {
   await UserService().createUserIfNotExist();
 
   // UserService().createTestUser();
+  await UserService().updateLoginDay();
 
   runApp(MultiProvider(
     providers: [
