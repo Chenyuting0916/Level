@@ -37,20 +37,20 @@ class ProfilePage extends StatelessWidget {
                       titleIcon: const Icon(Icons.person)),
                   const MyDivider(),
                   MyHeadshotAndUsername(
-                    imageUrl: 'lib/assets/v10.png',
+                    imageUrl: 'assets/v10.png',
                     username: user.username,
                   ),
                   MyLevel(
                     level: user.level,
                     exp: user.exp,
                     oldLevel: user.level,
+                    learningSeconds: 0,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Column(
                         children: [

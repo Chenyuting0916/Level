@@ -59,13 +59,14 @@ class _FocusScorePageState extends State<FocusScorePage> {
                       titleIcon: const Icon(Icons.show_chart_rounded)),
                   const MyDivider(),
                   MyHeadshotAndUsername(
-                    imageUrl: 'lib/assets/v10.png',
+                    imageUrl: 'assets/v10.png',
                     username: user.username,
                   ),
                   MyLevel(
                     level: user.level,
                     exp: user.exp,
                     oldLevel: widget.oldUser.level,
+                    learningSeconds: user.seconds - widget.oldUser.seconds,
                   ),
                   AllStatus(
                       user: user,

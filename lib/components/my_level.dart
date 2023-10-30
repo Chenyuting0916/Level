@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:level/models/level.dart';
+import 'package:level/services/status_service.dart';
 
 class MyLevel extends StatelessWidget {
   final int level;
   final int exp;
   final int oldLevel;
+  final int learningSeconds;
 
   const MyLevel(
       {super.key,
       required this.level,
       required this.exp,
-      required this.oldLevel});
+      required this.oldLevel,
+      required this.learningSeconds});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,8 @@ class MyLevel extends StatelessWidget {
         children: [
           Text(
               "Lv. $level ${(level - oldLevel) > 0 ? "(+${level - oldLevel})" : ""}"),
-          Text("Exp. $exp / ${Level(level: level, currentExp: exp).maxExp}"),
+          Text(
+              "Exp. $exp ${(StatusService().getAddExp(learningSeconds)) > 0 ? "(+${StatusService().getAddExp(learningSeconds)}) " : ""}/ ${Level(level: level, currentExp: exp).maxExp}"),
         ],
       ),
       const SizedBox(
