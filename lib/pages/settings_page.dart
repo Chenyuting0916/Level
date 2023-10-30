@@ -4,6 +4,7 @@ import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
+import 'package:level/services/local_storage_service.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _isLightMode = false;
+  bool _isLightMode = LocalStorageService().getData("LightMode");
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile.adaptive(
               value: _isLightMode,
               onChanged: (newValue) async {
-                _isLightMode = !_isLightMode;
                 Provider.of<ThemeProvider>(context, listen: false)
                     .toggleTheme();
+                _isLightMode = !_isLightMode;
               },
               title: Text(
                 'LightTheme'.i18n(),

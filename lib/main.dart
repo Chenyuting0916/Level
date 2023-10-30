@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:level/api/firebase_api.dart';
 import 'package:level/firebase_options.dart';
 import 'package:level/pages/home_page.dart';
@@ -12,6 +13,8 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  var box = await Hive.openBox('settings');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
   await UserService().createUserIfNotExist();
