@@ -30,7 +30,7 @@ class RankingPage extends StatelessWidget {
                   MyTitle(
                       title: "Rank".i18n(),
                       titleIcon: const Icon(Icons.bar_chart_outlined)),
-                  const MyDevider(),
+                  const MyDivider(),
                   ...rankedUsers.map(buildUser).toList(),
                 ],
               ),
@@ -43,7 +43,7 @@ class RankingPage extends StatelessWidget {
                   MyTitle(
                       title: "Rank".i18n(),
                       titleIcon: const Icon(Icons.bar_chart_outlined)),
-                  const MyDevider(),
+                  const MyDivider(),
                   Text("NoDataFound".i18n()),
                 ],
               ),

@@ -57,12 +57,16 @@ class _FocusScorePageState extends State<FocusScorePage> {
                   MyTitle(
                       title: "Result".i18n(),
                       titleIcon: const Icon(Icons.show_chart_rounded)),
-                  const MyDevider(),
+                  const MyDivider(),
                   MyHeadshotAndUsername(
                     imageUrl: 'lib/assets/v10.png',
                     username: user.username,
                   ),
-                  MyLevel(level: user.level, exp: user.exp),
+                  MyLevel(
+                    level: user.level,
+                    exp: user.exp,
+                    oldLevel: widget.oldUser.level,
+                  ),
                   AllStatus(
                       user: user,
                       categoryId: widget.categoryId,

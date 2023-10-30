@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
             MyTitle(
                 title: "Settings".i18n(),
                 titleIcon: const Icon(Icons.settings)),
-            const MyDevider(),
+            const MyDivider(),
             SwitchListTile.adaptive(
               value: _isLightMode,
               onChanged: (newValue) async {

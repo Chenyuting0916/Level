@@ -5,7 +5,13 @@ import 'package:level/models/level.dart';
 class MyLevel extends StatelessWidget {
   final int level;
   final int exp;
-  const MyLevel({super.key, required this.level, required this.exp});
+  final int oldLevel;
+
+  const MyLevel(
+      {super.key,
+      required this.level,
+      required this.exp,
+      required this.oldLevel});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,8 @@ class MyLevel extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Lv. $level"),
+          Text(
+              "Lv. $level ${(level - oldLevel) > 0 ? "(+${level - oldLevel})" : ""}"),
           Text("Exp. $exp / ${Level(level: level, currentExp: exp).maxExp}"),
         ],
       ),

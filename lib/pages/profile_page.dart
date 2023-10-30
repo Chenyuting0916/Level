@@ -35,12 +35,16 @@ class ProfilePage extends StatelessWidget {
                   MyTitle(
                       title: "Profile".i18n(),
                       titleIcon: const Icon(Icons.person)),
-                  const MyDevider(),
+                  const MyDivider(),
                   MyHeadshotAndUsername(
                     imageUrl: 'lib/assets/v10.png',
                     username: user.username,
                   ),
-                  MyLevel(level: user.level, exp: user.exp),
+                  MyLevel(
+                    level: user.level,
+                    exp: user.exp,
+                    oldLevel: user.level,
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -91,8 +95,9 @@ class ProfilePage extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 200,
-                    child:
-                    MyBarChart(user: user,),
+                    child: MyBarChart(
+                      user: user,
+                    ),
                   ),
                 ],
               ),
