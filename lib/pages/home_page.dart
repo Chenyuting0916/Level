@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:level/pages/daily_quest_page.dart';
 import 'package:level/pages/profile_page.dart';
 import 'package:level/pages/ranking_page.dart';
 import 'package:level/pages/settings_page.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   final List _pages = [
     const ProfilePage(),
     const TimerPage(),
+    const DailyQuestPage(),
     const RankingPage(),
     const SettingsPage(),
   ];
@@ -51,6 +53,10 @@ class _HomePageState extends State<HomePage> {
           GButton(
             icon: Icons.access_time_filled,
             text: 'Focus'.i18n(),
+          ),
+          GButton(
+            icon: Icons.task,
+            text: 'DailyQuest'.i18n(),
           ),
           GButton(
             icon: Icons.bar_chart_outlined,

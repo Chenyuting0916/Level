@@ -4,6 +4,7 @@ import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_button.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_headshot_username.dart';
+import 'package:level/components/my_hint.dart';
 import 'package:level/components/my_level.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/models/user.dart';
@@ -93,22 +94,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
                   )
                 ]),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                            title: Text(
-                              "LongerThanTen".i18n(),
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                          ));
-                },
-                child: Icon(
-                  Icons.lightbulb,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-              ),
+              floatingActionButton: MyHint(hintMessage: "LongerThanTen".i18n()),
             ),
           );
         } else {
