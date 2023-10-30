@@ -11,7 +11,7 @@ class _BarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<double>(
-        future: StatusService().averageStatus(),
+        future: StatusService().getBiggestStatus(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:level/models/category.dart';
 import 'package:level/models/level.dart';
 import 'package:level/models/user.dart';
@@ -30,55 +32,73 @@ class StatusService {
 
   Map<String, int> updateStatusByCategory(int categoryId, User? user) {
     if (user == null) return {};
+    Map<String, int> results = {};
     switch (Category.getCategoryEnum(categoryId)) {
       case CategoryName.exercises:
-        return {
+        results.addEntries({
           "strength": user.strength + 3,
           "vitality": user.vitality + 5,
           "agility": user.agility + 2
-        };
+        }.entries);
+        break;
       case CategoryName.study:
-        return {
+        results.addEntries({
           "wisdom": user.wisdom + 3,
           "intelligence": user.intelligence + 5,
           "professionalSkill": user.professionalSkill + 2
-        };
+        }.entries);
+        break;
       case CategoryName.mindfulness:
-        return {
+        results.addEntries({
           "agility": user.agility + 3,
           "wisdom": user.wisdom + 5,
           "vitality": user.vitality + 2
-        };
+        }.entries);
+        break;
       case CategoryName.art:
-        return {
+        results.addEntries({
           "wisdom": user.wisdom + 1,
           "intelligence": user.intelligence + 3,
           "professionalSkill": user.professionalSkill + 5,
-        };
+        }.entries);
+        break;
       case CategoryName.work:
-        return {"professionalSkill": user.professionalSkill + 7};
+        results.addEntries(
+            {"professionalSkill": user.professionalSkill + 7}.entries);
+        break;
       case CategoryName.code:
-        return {"professionalSkill": user.professionalSkill + 5};
+        results.addEntries(
+            {"professionalSkill": user.professionalSkill + 5}.entries);
+        break;
       case CategoryName.learnLanguage:
-        return {
+        results.addEntries({
           "intelligence": user.intelligence + 3,
           "professionalSkill": user.professionalSkill + 5
-        };
+        }.entries);
+        break;
       case CategoryName.startABusiness:
-        return {
+        results.addEntries({
           "agility": user.agility + 3,
           "financialQuotient": user.financialQuotient + 5,
           "wisdom": user.wisdom + 2
-        };
+        }.entries);
+        break;
       case CategoryName.financialLiteracy:
-        return {
+        results.addEntries({
           "intelligence": user.intelligence + 3,
           "financialQuotient": user.financialQuotient + 7,
           "wisdom": user.wisdom + 1
-        };
+        }.entries);
+        break;
       default:
         return {};
     }
+
+    if (Random().nextInt(1000) > 500) {
+      results.addEntries({"luck": user.luck + 1}.entries);
+    }
+
+    return results;
   }
 
   int getAddExp(int learningSeconds) {
@@ -86,9 +106,8 @@ class StatusService {
     return addExp >= 10 ? 10 : addExp;
   }
 
-  Future<double> averageStatus() async {
+  Future<double> getBiggestStatus() async {
     var user = await UserService().getCurrentUser();
-    int sum = 0;
     var allStatus = [
       user!.agility,
       user.strength,
@@ -100,10 +119,6 @@ class StatusService {
       user.financialQuotient
     ];
 
-    for (var e in allStatus) {
-      sum += e;
-    }
-
-    return sum / allStatus.length;
+    return allStatus.reduce(max).toDouble();
   }
 }

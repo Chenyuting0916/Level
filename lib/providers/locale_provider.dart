@@ -11,10 +11,7 @@ class LocaleProvider with ChangeNotifier {
       localStorageService.createInitialLocale();
     }
 
-    print(localStorageService.getData("Language"));
-
     return Locale(localStorageService.getData("Language"));
-    //  return const Locale('zh');
   }
 
   Locale get locale => _locale ?? getDefaultLocale();
