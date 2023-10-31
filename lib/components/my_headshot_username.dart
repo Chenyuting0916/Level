@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:level/components/my_button.dart';
+import 'package:level/components/my_icon_button.dart';
 import 'package:level/services/user_service.dart';
 
 // ignore: must_be_immutable
@@ -50,7 +50,7 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
                       style: const TextStyle(fontSize: 24),
                     ),
                   ),
-                  MyButton(
+                  MyIconButton(
                     onPressed: () {
                       setState(() {
                         toggleEdit = !toggleEdit;
@@ -61,42 +61,46 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
                   )
                 ],
               )),
-          Visibility(
-              visible: toggleEdit,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                    child: TextField(
-                      controller: textController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+          Expanded(
+            child: Visibility(
+                visible: toggleEdit,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: 55,
+                      width: 100,
+                      child: TextField(
+                        controller: textController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
                       ),
                     ),
-                  ),
-                  MyButton(
-                    onPressed: () {
-                      UserService()
-                          .updateUser({"username": textController.value.text});
-                      setState(() {
-                        toggleEdit = !toggleEdit;
-                        widget.username = textController.value.text;
-                      });
-                    },
-                    buttonChild: const Icon(Icons.save),
-                    buttonBackgroundColor: Colors.transparent,
-                  ),
-                  MyButton(
-                    onPressed: () {
-                      setState(() {
-                        toggleEdit = !toggleEdit;
-                      });
-                    },
-                    buttonChild: const Icon(Icons.keyboard_return_outlined),
-                    buttonBackgroundColor: Colors.transparent,
-                  )
-                ],
-              ))
+                    MyIconButton(
+                      onPressed: () {
+                        UserService().updateUser(
+                            {"username": textController.value.text});
+                        setState(() {
+                          toggleEdit = !toggleEdit;
+                          widget.username = textController.value.text;
+                        });
+                      },
+                      buttonChild: const Icon(Icons.save),
+                      buttonBackgroundColor: Colors.transparent,
+                    ),
+                    MyIconButton(
+                      onPressed: () {
+                        setState(() {
+                          toggleEdit = !toggleEdit;
+                        });
+                      },
+                      buttonChild: const Icon(Icons.keyboard_return_outlined),
+                      buttonBackgroundColor: Colors.transparent,
+                    )
+                  ],
+                )),
+          )
         ],
       ),
     );

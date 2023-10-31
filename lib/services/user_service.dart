@@ -83,7 +83,7 @@ class UserService {
             snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
   }
 
-  void updateUser(Map<String, dynamic> updateData) async {
+  Future updateUser(Map<String, dynamic> updateData) async {
     String? userId = await _getId();
     final snapshot = _firestore.collection('users').doc(userId);
 
@@ -115,7 +115,7 @@ class UserService {
 
     if (last == today) return;
 
-    updateUser(
+    await updateUser(
         {"lastLoginDay": DateTime.now(), "loginDays": user.loginDays + 1});
   }
 }
