@@ -48,6 +48,8 @@ dependencies:
   fl_chart: ^0.64.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  flutter_slidable: ^1.2.0
+  flutter_heatmap_calendar: ^1.0.5
 
 dev_dependencies:
   flutter_test:

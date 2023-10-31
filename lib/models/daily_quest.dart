@@ -1,5 +1,5 @@
 class DailyQuest {
-  final String dailyQuestName;
+  String dailyQuestName;
   bool isCompleted;
 
   DailyQuest({required this.dailyQuestName, required this.isCompleted});

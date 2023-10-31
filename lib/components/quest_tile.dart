@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:level/components/my_icon_button.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class QuestTile extends StatefulWidget {
   final String questName;
   final bool isCompleted;
   final Function(bool?)? onChanged;
+  final Function(BuildContext)? editOnPressed;
+  final Function(BuildContext)? deleteOnPressed;
+  final VoidCallback questOnTapped;
+
   const QuestTile(
       {super.key,
       required this.questName,
       required this.isCompleted,
-      required this.onChanged});
+      required this.onChanged,
+      required this.editOnPressed,
+      required this.deleteOnPressed,
+      required this.questOnTapped});
 
   @override
   State<QuestTile> createState() => _QuestTileState();
@@ -20,76 +27,50 @@ class _QuestTileState extends State<QuestTile> {
 
   @override
   Widget build(BuildContext context) {
-    final textController = TextEditingController(text: widget.questName);
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all()),
-        child: Row(
-          children: [
-            Visibility(
-              visible: !toggleEdit,
-              child: Row(
-                children: [
-                  Checkbox(
-                      value: widget.isCompleted, onChanged: widget.onChanged),
-                  Text(widget.questName),
-                  MyIconButton(
-                    onPressed: () {
-                      setState(() {
-                        toggleEdit = !toggleEdit;
-                      });
-                    },
-                    buttonChild: const Icon(Icons.edit),
-                    buttonBackgroundColor: Colors.transparent,
-                  )
-                ],
-              ),
+      child: Slidable(
+        endActionPane: ActionPane(motion: const StretchMotion(), children: [
+          SlidableAction(
+            onPressed: widget.editOnPressed,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            icon: Icons.edit,
+          ),
+          SlidableAction(
+            onPressed: widget.deleteOnPressed,
+            backgroundColor: const Color.fromARGB(255, 253, 94, 83),
+            icon: Icons.delete,
+            borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
+          ),
+        ]),
+        child: InkWell(
+          onTap: widget.questOnTapped,
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            Visibility(
-              visible: toggleEdit,
-              child: Row(
-                children: [
-                  Checkbox(
-                      value: widget.isCompleted, onChanged: widget.onChanged),
-                  SizedBox(
-                    width: 100,
-                    child: TextField(
-                      controller: textController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                  MyIconButton(
-                    onPressed: () {
-                      // UserService()
-                      //     .updateUser({"username": textController.value.text});
-                      setState(() {
-                        toggleEdit = !toggleEdit;
-                      });
-                    },
-                    buttonChild: const Icon(Icons.save),
-                    buttonBackgroundColor: Colors.transparent,
-                  ),
-                  MyIconButton(
-                    onPressed: () {
-                      setState(() {
-                        toggleEdit = !toggleEdit;
-                      });
-                    },
-                    buttonChild: const Icon(Icons.keyboard_return_outlined),
-                    buttonBackgroundColor: Colors.transparent,
-                  )
-                ],
-              ),
+            child: Row(
+              children: [
+                Row(
+                  children: [
+                    Checkbox(
+                        checkColor: const Color.fromARGB(221, 37, 37, 37),
+                        activeColor: Colors.green.shade300,
+                        value: widget.isCompleted,
+                        onChanged: widget.onChanged),
+                    Text(widget.questName,
+                        style: TextStyle(
+                            decoration: widget.isCompleted
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none)),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

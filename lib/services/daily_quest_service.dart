@@ -26,8 +26,8 @@ class DailyQuestService {
 
     if (!snapshot.exists) {
       DailyQuests dailyQuest = DailyQuests(userId: userId, dailyQuests: [
-        DailyQuest(dailyQuestName: "", isCompleted: false),
-        DailyQuest(dailyQuestName: "", isCompleted: false)
+        DailyQuest(dailyQuestName: "Morning Run", isCompleted: false),
+        DailyQuest(dailyQuestName: "Read Book", isCompleted: false)
       ]);
 
       await _firestore
@@ -44,9 +44,16 @@ class DailyQuestService {
     snapshot.update(updateData);
   }
 
-  void completeTask(int index, bool? value) async {
+  Future completeTask(int index, bool? value) async {
     var dailyQuest = await getDailyQuest();
     dailyQuest!.dailyQuests[index].isCompleted = value!;
+    await updateDailyQuest(dailyQuest.toMap());
+  }
+
+  Future addNewDailyQuest(String questName) async {
+    var dailyQuest = await getDailyQuest();
+    dailyQuest!.dailyQuests
+        .add(DailyQuest(dailyQuestName: questName, isCompleted: false));
     await updateDailyQuest(dailyQuest.toMap());
   }
 
@@ -60,5 +67,17 @@ class DailyQuestService {
       return androidDeviceInfo.androidId;
     }
     return null;
+  }
+
+  Future editDailyQuest(int index, String questName) async {
+    var dailyQuest = await getDailyQuest();
+    dailyQuest!.dailyQuests[index].dailyQuestName = questName;
+    await updateDailyQuest(dailyQuest.toMap());
+  }
+
+  Future deleteQuest(int index) async {
+    var dailyQuest = await getDailyQuest();
+    dailyQuest!.dailyQuests.removeAt(index);
+    await updateDailyQuest(dailyQuest.toMap());
   }
 }

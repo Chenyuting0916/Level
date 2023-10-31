@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/my_dialog.dart';
+import 'package:level/components/my_dialog_with_textfield.dart';
 import 'package:level/components/my_divider.dart';
-import 'package:level/components/my_hint.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/daily_quests.dart';
+import 'package:level/pages/home_page.dart';
 import 'package:level/services/daily_quest_service.dart';
 import 'package:localization/localization.dart';
 
@@ -15,12 +17,16 @@ class DailyQuestPage extends StatefulWidget {
 }
 
 class _DailyQuestPageState extends State<DailyQuestPage> {
-  bool taskCompleted = false;
-  void checkBoxTapped(bool? value, int index) {
-    DailyQuestService().completeTask(index, value);
-    setState(() {
-      taskCompleted = value!;
-    });
+  final textController = TextEditingController();
+
+  Future<void> checkBoxTapped(bool? value, int index) async {
+    await DailyQuestService().completeTask(index, value);
+    if (!mounted) return;
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, _) {
+        return const HomePage(selectedIndex: 2);
+      },
+    ));
   }
 
   @override
@@ -55,18 +61,107 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                           isCompleted:
                               dailyQuests.dailyQuests[index].isCompleted,
                           onChanged: (value) => checkBoxTapped(value, index),
+                          editOnPressed: (context) => editQuestDialog(index),
+                          deleteOnPressed: (context) =>
+                              deleteQuestDialog(index),
+                          questOnTapped: () {
+                            editQuestDialog(index);
+                          },
                         );
                       },
                     ),
                   ),
                 ]),
               ),
-              floatingActionButton:
-                  MyHint(hintMessage: "DailyQuestHint".i18n()),
+
+              floatingActionButton: Visibility(
+                visible: dailyQuests.dailyQuests.length <= 3,
+                child: FloatingActionButton(
+                  onPressed: addNewQuestDialog,
+                  child: Icon(
+                    Icons.add,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+              ),
+              // MyHint(hintMessage: "DailyQuestHint".i18n()),
             );
           } else {
             return Center(child: Text("NoDataFound".i18n()));
           }
+        });
+  }
+
+  void addNewQuestDialog() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return MyDialogWithTextField(
+              controller: textController,
+              title: "EnterYourDailyQuest".i18n(),
+              hintText: "EnterYourDailyQuest".i18n(),
+              onYesPressed: () async {
+                await DailyQuestService().addNewDailyQuest(textController.text);
+                textController.clear();
+                if (!mounted) return;
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, _) {
+                    return const HomePage(selectedIndex: 2);
+                  },
+                ));
+              },
+              onNoPressed: () {
+                textController.clear();
+                Navigator.of(context).pop();
+              });
+        });
+  }
+
+  editQuestDialog(int index) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return MyDialogWithTextField(
+              controller: textController,
+              title: "EnterYourDailyQuest".i18n(),
+              hintText: "EnterYourDailyQuest".i18n(),
+              onYesPressed: () async {
+                await DailyQuestService()
+                    .editDailyQuest(index, textController.text);
+                textController.clear();
+                if (!mounted) return;
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, _) {
+                    return const HomePage(selectedIndex: 2);
+                  },
+                ));
+              },
+              onNoPressed: () {
+                textController.clear();
+                Navigator.of(context).pop();
+              });
+        });
+  }
+
+  deleteQuestDialog(int index) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return MyDialog(
+              title: "SureToDeleteQuest".i18n(),
+              onYesPressed: () async {
+                await DailyQuestService().deleteQuest(index);
+                textController.clear();
+                if (!mounted) return;
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, _) {
+                    return const HomePage(selectedIndex: 2);
+                  },
+                ));
+              },
+              onNoPressed: () {
+                Navigator.of(context).pop();
+              });
         });
   }
 }
