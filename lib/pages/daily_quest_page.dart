@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/monthy_summary.dart';
 import 'package:level/components/my_dialog.dart';
 import 'package:level/components/my_dialog_with_textfield.dart';
 import 'package:level/components/my_divider.dart';
@@ -51,6 +52,7 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                       title: "DailyQuest".i18n(),
                       titleIcon: const Icon(Icons.task)),
                   const MyDivider(),
+                  const MonthlySummary(),
                   Expanded(
                     child: ListView.builder(
                       itemCount: dailyQuests.dailyQuests.length,
