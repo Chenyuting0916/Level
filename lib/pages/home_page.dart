@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
           ),
           GButton(
             icon: Icons.task,
-            text: 'DailyQuest'.i18n(),
+            text: 'Daily'.i18n(),
           ),
           GButton(
             icon: Icons.bar_chart_outlined,
