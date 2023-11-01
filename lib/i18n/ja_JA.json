@@ -44,7 +44,7 @@
     "NoDataFound": "No Data Found :(",
     "SureToStopWithoutExp": "本当に退会してもよろしいですか? \n（経験値は得られません!!）",
     "LoginDays": "ログイン日数：%s 日",
-    "FinishedTasks": "完了したタスク: %s",
+    "FinishedTasks": "完了したミッション: %s",
     "EnterYourDailyQuest": "デイリーミッションを入力してください",
     "DailyQuest": "デイリーミッション",
     "Daily": "デイリー"

@@ -95,4 +95,13 @@ class DailyQuestService {
     dailyQuest!.dailyQuests.removeAt(index);
     await updateDailyQuest(dailyQuest.toMap());
   }
+
+  Future<int> getCompletedTasksNumber() async {
+    var dailyQuest = await getDailyQuest();
+    int sum = 0;
+    for (var element in dailyQuest!.datasets.values) {
+      sum += element;
+    }
+    return  sum;
+  }
 }

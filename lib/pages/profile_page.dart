@@ -6,6 +6,7 @@ import 'package:level/components/my_level.dart';
 import 'package:level/components/my_row_status.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/models/user.dart';
+import 'package:level/services/daily_quest_service.dart';
 import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 
@@ -83,9 +84,21 @@ class ProfilePage extends StatelessWidget {
                           Text(
                             "LoginDays".i18n([user.loginDays.toString()]),
                           ),
-                          Text(
-                            "FinishedTasks".i18n([user.loginDays.toString()]),
-                          ),
+                          FutureBuilder<int>(
+                              future:
+                                  DailyQuestService().getCompletedTasksNumber(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  final finishedTasks = snapshot.data!;
+                                  return Text(
+                                    "FinishedTasks"
+                                        .i18n([(finishedTasks - 1).toString()]),
+                                  );
+                                } else {
+                                  return Center(
+                                      child: Text("NoDataFound".i18n()));
+                                }
+                              }),
                         ],
                       ),
                     ],
