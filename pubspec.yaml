@@ -50,6 +50,13 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_slidable: ^1.2.0
   flutter_heatmap_calendar: ^1.0.5
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icons/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 dev_dependencies:
   flutter_test:
