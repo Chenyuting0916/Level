@@ -47,5 +47,6 @@
     "FinishedTasks": "Completed Tasks: %s",
     "EnterYourDailyQuest": "Please Enter Your Daily Quest",
     "DailyQuest": "Daily Quest",
-    "Daily": "Daily"
+    "Daily": "Daily",
+    "DailyQuestHint": "Swipe left to delete daily quest"
 }

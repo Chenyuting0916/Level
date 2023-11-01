@@ -47,5 +47,6 @@
     "FinishedTasks": "完了したミッション: %s",
     "EnterYourDailyQuest": "デイリーミッションを入力してください",
     "DailyQuest": "デイリーミッション",
-    "Daily": "デイリー"
+    "Daily": "デイリー",
+    "DailyQuestHint": "左にスワイプしてデイリーミッションを削除します"
 }

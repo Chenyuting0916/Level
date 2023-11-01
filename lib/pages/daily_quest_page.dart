@@ -1,8 +1,10 @@
+import 'package:animated_floating_buttons/widgets/animated_floating_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:level/components/monthy_summary.dart';
 import 'package:level/components/my_dialog.dart';
 import 'package:level/components/my_dialog_with_textfield.dart';
 import 'package:level/components/my_divider.dart';
+import 'package:level/components/my_hint.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/daily_quests.dart';
@@ -19,7 +21,8 @@ class DailyQuestPage extends StatefulWidget {
 
 class _DailyQuestPageState extends State<DailyQuestPage> {
   final textController = TextEditingController();
-
+  final GlobalKey<AnimatedFloatingActionButtonState> key =
+      GlobalKey<AnimatedFloatingActionButtonState>();
   Future<void> checkBoxTapped(bool? value, int index) async {
     await DailyQuestService().completeTask(index, value);
     if (!mounted) return;
@@ -77,12 +80,22 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
               ),
               floatingActionButton: Visibility(
                 visible: dailyQuests.dailyQuests.length <= 3,
-                child: FloatingActionButton(
-                  onPressed: addNewQuestDialog,
-                  child: Icon(
-                    Icons.add,
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
+                child: AnimatedFloatingActionButton(
+                  fabButtons: [
+                    MyHint(hintMessage: 'DailyQuestHint'.i18n()),
+                    FloatingActionButton(
+                      heroTag: "NewQuestDialog",
+                      onPressed: addNewQuestDialog,
+                      child: Icon(
+                        Icons.add,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                    )
+                  ],
+                  key: key,
+                  animatedIconData: AnimatedIcons.menu_close,
+                  colorStartAnimation: Theme.of(context).colorScheme.secondary,
+                  colorEndAnimation: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             );

@@ -7,6 +7,7 @@ class MyHint extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: "hint",
       onPressed: () {
         showDialog(
             context: context,
