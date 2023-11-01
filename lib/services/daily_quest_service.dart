@@ -28,7 +28,9 @@ class DailyQuestService {
       DailyQuests dailyQuest = DailyQuests(userId: userId, dailyQuests: [
         DailyQuest(dailyQuestName: "Morning Run", isCompleted: false),
         DailyQuest(dailyQuestName: "Read Book", isCompleted: false)
-      ]);
+      ], datasets: {
+        DateTime(1997, 09, 16): 1,
+      });
 
       await _firestore
           .collection("dailyQuests")
@@ -45,8 +47,21 @@ class DailyQuestService {
   }
 
   Future completeTask(int index, bool? value) async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
     var dailyQuest = await getDailyQuest();
     dailyQuest!.dailyQuests[index].isCompleted = value!;
+    if (value) {
+      dailyQuest.datasets.update(today, (value) => value + 1,
+          ifAbsent: () => dailyQuest.datasets[today] = 1);
+    } else {
+      if (dailyQuest.datasets[today] == 1) {
+        dailyQuest.datasets.removeWhere((key, value) => key == today);
+      } else {
+        dailyQuest.datasets.update(today, (value) => value - 1,
+            ifAbsent: () => dailyQuest.datasets[today] = 1);
+      }
+    }
     await updateDailyQuest(dailyQuest.toMap());
   }
 

@@ -52,7 +52,7 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                       title: "DailyQuest".i18n(),
                       titleIcon: const Icon(Icons.task)),
                   const MyDivider(),
-                  const MonthlySummary(),
+                  MonthlySummary(datasets: dailyQuests.datasets),
                   Expanded(
                     child: ListView.builder(
                       itemCount: dailyQuests.dailyQuests.length,
@@ -75,7 +75,6 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                   ),
                 ]),
               ),
-
               floatingActionButton: Visibility(
                 visible: dailyQuests.dailyQuests.length <= 3,
                 child: FloatingActionButton(
@@ -86,7 +85,6 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                   ),
                 ),
               ),
-              // MyHint(hintMessage: "DailyQuestHint".i18n()),
             );
           } else {
             return Center(child: Text("NoDataFound".i18n()));
