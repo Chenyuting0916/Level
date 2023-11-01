@@ -15,13 +15,15 @@ class _TimerPageState extends State<TimerPage> {
     return const Scaffold(
       body: Padding(
         padding: EdgeInsets.all(80.0),
-        child: Column(children: [
-          SizedBox(
-            height: 50,
-          ),
-          CurrentTime(),
-          AnimatedButton(),
-        ]),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              CurrentTime(),
+              AnimatedButton(),
+            ]),
       ),
     );
   }

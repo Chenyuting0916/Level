@@ -11,9 +11,6 @@ class AnimatedButton extends StatelessWidget {
     return Center(
         child: Column(
       children: [
-        const SizedBox(
-          height: 200,
-        ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,

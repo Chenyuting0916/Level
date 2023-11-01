@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
         onTabChange: _navigateBottomBar,
         backgroundColor: Theme.of(context).colorScheme.background,
         gap: 4,
+        haptic: true,
         padding: const EdgeInsets.all(16),
         tabs: [
           GButton(
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           color: Theme.of(context).colorScheme.background,
           child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
               child: buildNav()),
         ),
         body: _pages[_selectedIndex],
