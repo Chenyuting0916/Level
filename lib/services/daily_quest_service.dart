@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:level/models/daily_quest.dart';
@@ -102,6 +101,20 @@ class DailyQuestService {
     for (var element in dailyQuest!.datasets.values) {
       sum += element;
     }
-    return  sum;
+    return sum;
+  }
+
+  clearYesterdayCompletedDailyQuest() async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    var dailyQuest = await getDailyQuest();
+    if (!dailyQuest!.datasets.containsKey(today)) {
+      for (var d in dailyQuest.dailyQuests) {
+        d.isCompleted = false;
+      }
+    }
+
+    await updateDailyQuest(dailyQuest.toMap());
   }
 }

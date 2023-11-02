@@ -23,6 +23,7 @@ void main() async {
 
   // UserService().createTestUser();
   await UserService().updateLoginDay();
+  await DailyQuestService().clearYesterdayCompletedDailyQuest();
 
   runApp(MultiProvider(
     providers: [
