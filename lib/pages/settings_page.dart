@@ -46,7 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
               activeTrackColor: Theme.of(context).colorScheme.primary,
             ),
             buildLanguageDropdown(),
-            Text("donate")
+            Text("Donate".i18n())
           ],
         ),
       ),

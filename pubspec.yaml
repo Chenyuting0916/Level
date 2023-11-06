@@ -52,6 +52,7 @@ dependencies:
   flutter_heatmap_calendar: ^1.0.5
   flutter_launcher_icons: ^0.13.1
   animated_floating_buttons: ^0.0.2
+  in_app_purchase: ^3.1.11
 
 flutter_launcher_icons:
   android: "launcher_icon"
