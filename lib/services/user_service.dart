@@ -28,7 +28,8 @@ class UserService {
           financialQuotient: 10,
           seconds: 0,
           loginDays: 1,
-          lastLoginDay: DateTime.now());
+          lastLoginDay: DateTime.now(),
+          imageUrl: "");
 
       await _firestore.collection("users").doc(userId).set(user.toMap());
     }
@@ -55,7 +56,8 @@ class UserService {
         financialQuotient: 10,
         seconds: rabdomSeconds,
         loginDays: 1,
-        lastLoginDay: DateTime.now());
+        lastLoginDay: DateTime.now(),
+        imageUrl: "");
 
     _firestore
         .collection("users")

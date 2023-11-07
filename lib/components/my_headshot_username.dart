@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:level/components/my_icon_button.dart';
@@ -9,7 +8,7 @@ import 'package:level/services/user_service.dart';
 // ignore: must_be_immutable
 class MyHeadshotAndUsername extends StatefulWidget {
   String username;
-  final String imageUrl;
+  String imageUrl;
   MyHeadshotAndUsername(
       {super.key, required this.username, required this.imageUrl});
 
@@ -19,7 +18,6 @@ class MyHeadshotAndUsername extends StatefulWidget {
 
 class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
   var toggleEdit = false;
-  Uint8List? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +28,14 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(children: [
-            _image != null
+            widget.imageUrl != ""
                 ? CircleAvatar(
                     radius: 40,
                     backgroundColor: Theme.of(context).colorScheme.tertiary,
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       radius: 37,
-                      backgroundImage:MemoryImage(_image!),
+                      backgroundImage: NetworkImage(widget.imageUrl),
                     ),
                   )
                 : CircleAvatar(
@@ -46,7 +44,7 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       radius: 37,
-                      backgroundImage: AssetImage(widget.imageUrl),
+                      backgroundImage: const AssetImage("assets/v10.png"),
                     ),
                   ),
             Positioned(
@@ -133,8 +131,12 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
 
   void selectImage() async {
     Uint8List? img = await ImageService().pickImage(ImageSource.gallery);
-    setState(() {
-      _image = img;
-    });
+    if (img != null) {
+      var downloadUrl = await ImageService().saveToFirebase(img);
+      await UserService().updateUser({'imageUrl': downloadUrl});
+      setState(() {
+        widget.imageUrl = downloadUrl;
+      });
+    }
   }
 }

@@ -14,6 +14,7 @@ class User {
   final int seconds;
   final int loginDays;
   final DateTime lastLoginDay;
+  final String imageUrl;
 
   User(
       {required this.userId,
@@ -30,7 +31,8 @@ class User {
       required this.financialQuotient,
       required this.seconds,
       required this.loginDays,
-      required this.lastLoginDay});
+      required this.lastLoginDay,
+      required this.imageUrl});
 
   Map<String, dynamic> toMap() {
     return {
@@ -48,7 +50,8 @@ class User {
       "financialQuotient": financialQuotient,
       "seconds": seconds,
       "loginDays": loginDays,
-      "lastLoginDay": lastLoginDay
+      "lastLoginDay": lastLoginDay,
+      "imageUrl": imageUrl,
     };
   }
 
@@ -67,5 +70,6 @@ class User {
       seconds: json['seconds'] ?? 0,
       exp: json['exp'] ?? 1,
       loginDays: json['loginDays'] ?? 1,
-      lastLoginDay: json['lastLoginDay']?.toDate() ?? DateTime.now());
+      lastLoginDay: json['lastLoginDay']?.toDate() ?? DateTime.now(),
+      imageUrl: json['imageUrl'] ?? "");
 }
