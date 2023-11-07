@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:level/components/my_icon_button.dart';
+import 'package:level/services/image_service.dart';
 import 'package:level/services/user_service.dart';
 
 // ignore: must_be_immutable
@@ -15,6 +19,7 @@ class MyHeadshotAndUsername extends StatefulWidget {
 
 class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
   var toggleEdit = false;
+  Uint8List? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +29,35 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundColor: Theme.of(context).colorScheme.tertiary,
-            child: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              radius: 37,
-              backgroundImage: AssetImage(widget.imageUrl),
-            ),
-          ),
+          Stack(children: [
+            _image != null
+                ? CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Theme.of(context).colorScheme.tertiary,
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      radius: 37,
+                      backgroundImage:MemoryImage(_image!),
+                    ),
+                  )
+                : CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Theme.of(context).colorScheme.tertiary,
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      radius: 37,
+                      backgroundImage: AssetImage(widget.imageUrl),
+                    ),
+                  ),
+            Positioned(
+              bottom: -14,
+              left: 45,
+              child: IconButton(
+                icon: const Icon(Icons.add_a_photo),
+                onPressed: selectImage,
+              ),
+            )
+          ]),
           const SizedBox(
             width: 18,
           ),
@@ -104,5 +129,12 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
         ],
       ),
     );
+  }
+
+  void selectImage() async {
+    Uint8List? img = await ImageService().pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
   }
 }

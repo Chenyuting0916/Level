@@ -53,6 +53,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   animated_floating_buttons: ^0.0.2
   in_app_purchase: ^3.1.11
+  image_picker: ^1.0.4
 
 flutter_launcher_icons:
   android: "launcher_icon"
