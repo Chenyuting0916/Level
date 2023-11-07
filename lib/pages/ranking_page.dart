@@ -31,7 +31,9 @@ class RankingPage extends StatelessWidget {
                       title: "Rank".i18n(),
                       titleIcon: const Icon(Icons.bar_chart_outlined)),
                   const MyDivider(),
-                  ...rankedUsers.map(buildUser).toList(),
+                  ...rankedUsers
+                      .map((user) => buildUser(user, context))
+                      .toList(),
                 ],
               ),
             );
@@ -54,20 +56,34 @@ class RankingPage extends StatelessWidget {
     );
   }
 
-  Widget buildUser(User user) {
+  Widget buildUser(User user, BuildContext context) {
     final minutes = (user.seconds / 60).toStringAsFixed(2);
 
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.grey[350],
-        foregroundColor: Colors.grey.shade900,
-        child: Text(user.level.toString()),
-      ),
-      title: Text(user.username),
-      subtitle: Text(
-        "TimeSpend".i18n([minutes]),
-        style: const TextStyle(fontSize: 12),
-      ),
-    );
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundColor: Theme.of(context).colorScheme.tertiary,
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            radius: 24,
+            backgroundImage: NetworkImage(user.imageUrl == ""
+                ? "https://firebasestorage.googleapis.com/v0/b/level-36ac1.appspot.com/o/profileImage%2Fv10.png?alt=media&token=d4c980bf-7a75-4d23-9472-1370c22d6f53&_gl=1*13ol4ak*_ga*MTM5MjA3NjE2MC4xNjk4OTA5NzAx*_ga_CW55HF8NVT*MTY5OTM2MjMxNy40LjEuMTY5OTM2NDk0MS40MC4wLjA."
+                : user.imageUrl),
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(user.username),
+          ],
+        ),
+        subtitle: Text(
+          "TimeSpend".i18n([minutes]),
+          style: const TextStyle(fontSize: 12),
+        ),
+        trailing: Text(
+          "RankLevel".i18n([user.level.toString()]),
+          style: const TextStyle(fontSize: 14),
+        ));
   }
 }

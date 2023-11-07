@@ -28,25 +28,17 @@ class _MyHeadshotAndUsernameState extends State<MyHeadshotAndUsername> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Stack(children: [
-            widget.imageUrl != ""
-                ? CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Theme.of(context).colorScheme.tertiary,
-                    child: CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      radius: 37,
-                      backgroundImage: NetworkImage(widget.imageUrl),
-                    ),
-                  )
-                : CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Theme.of(context).colorScheme.tertiary,
-                    child: CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      radius: 37,
-                      backgroundImage: const AssetImage("assets/v10.png"),
-                    ),
-                  ),
+            CircleAvatar(
+              radius: 40,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                radius: 37,
+                backgroundImage: NetworkImage(widget.imageUrl == ""
+                    ? "https://firebasestorage.googleapis.com/v0/b/level-36ac1.appspot.com/o/profileImage%2Fv10.png?alt=media&token=d4c980bf-7a75-4d23-9472-1370c22d6f53&_gl=1*13ol4ak*_ga*MTM5MjA3NjE2MC4xNjk4OTA5NzAx*_ga_CW55HF8NVT*MTY5OTM2MjMxNy40LjEuMTY5OTM2NDk0MS40MC4wLjA."
+                    : widget.imageUrl),
+              ),
+            ),
             Positioned(
               bottom: -14,
               left: 45,

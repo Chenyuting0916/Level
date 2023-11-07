@@ -48,5 +48,6 @@
     "EnterYourDailyQuest": "デイリーミッションを入力してください",
     "DailyQuest": "デイリーミッション",
     "Daily": "デイリー",
-    "DailyQuestHint": "左にスワイプしてデイリーミッションを削除します"
+    "DailyQuestHint": "左にスワイプしてデイリーミッションを削除します",
+    "RankLevel": "Lv: %s"
 }

@@ -48,5 +48,6 @@
     "EnterYourDailyQuest": "請輸入您的每日任務",
     "DailyQuest": "每日任務",
     "Daily": "每日",
-    "DailyQuestHint": "左滑每日任務可以刪除"
+    "DailyQuestHint": "左滑每日任務可以刪除",
+    "RankLevel": "Lv: %s"
 }
