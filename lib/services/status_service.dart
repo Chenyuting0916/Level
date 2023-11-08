@@ -13,9 +13,9 @@ class StatusService {
     if (learningSeconds >= 600) {
       updatedData
           .addEntries(updateStatusByCategory(categoryId, oldUser).entries);
+      updatedData["seconds"] = oldUser!.seconds + learningSeconds;
     }
-    updatedData["seconds"] = oldUser!.seconds + learningSeconds;
-    updatedData.addEntries(levelUp(oldUser, learningSeconds).entries);
+    updatedData.addEntries(levelUp(oldUser!, learningSeconds).entries);
     UserService().updateUser(updatedData);
 
     return oldUser;
