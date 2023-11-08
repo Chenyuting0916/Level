@@ -74,7 +74,15 @@ class RankingPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(user.username),
+            Tooltip(
+              message: user.username,
+              triggerMode: TooltipTriggerMode.tap,
+              child: Text(
+                user.username.length > 10
+                    ? '${user.username.substring(0, 10)}...'
+                    : user.username,
+              ),
+            ),
           ],
         ),
         subtitle: Text(
