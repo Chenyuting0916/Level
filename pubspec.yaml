@@ -54,6 +54,8 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   animated_floating_buttons: ^0.0.2
   in_app_purchase: ^3.1.11
+  purchases_flutter: ^6.2.0
+  google_mobile_ads: ^3.1.0
   image_picker: ^1.0.4
 
 flutter_launcher_icons:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:level/components/my_button.dart';
+import 'package:level/components/my_hint.dart';
 import 'package:level/models/language.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
@@ -46,10 +48,33 @@ class _SettingsPageState extends State<SettingsPage> {
               activeTrackColor: Theme.of(context).colorScheme.primary,
             ),
             buildLanguageDropdown(),
-            Text("Donate".i18n())
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "SupportUs".i18n(),
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            MyButton(
+              buttonChild: Text("ChooseYourPlan".i18n()),
+              onPressed: fetchOffers,
+              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            MyButton(
+              buttonChild: Text("WatchAds".i18n()),
+              onPressed: watchAds,
+              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ],
         ),
       ),
+      floatingActionButton: MyHint(hintMessage: "AuthorBeggingForMoney".i18n()),
     );
   }
 
@@ -85,5 +110,12 @@ class _SettingsPageState extends State<SettingsPage> {
         }
       },
     );
+  }
+
+  Future fetchOffers() async {
+    // final allOffers = await PurchaseApi.fetchOffers();
+  }
+
+  void watchAds() {
   }
 }
