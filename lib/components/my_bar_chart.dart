@@ -81,7 +81,7 @@ class _BarChart extends StatelessWidget {
         text = 'AGI';
         break;
       case 4:
-        text = 'LUC';
+        text = 'LUK';
         break;
       case 5:
         text = 'VIT';
