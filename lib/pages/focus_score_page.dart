@@ -14,7 +14,7 @@ import 'package:localization/localization.dart';
 
 class FocusScorePage extends StatefulWidget {
   final int categoryId;
-  final User oldUser;
+  final MyUser oldUser;
   const FocusScorePage(
       {super.key, required this.categoryId, required this.oldUser});
 
@@ -25,7 +25,7 @@ class FocusScorePage extends StatefulWidget {
 class _FocusScorePageState extends State<FocusScorePage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User?>(
+    return FutureBuilder<MyUser?>(
       future: UserService().getCurrentUser(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

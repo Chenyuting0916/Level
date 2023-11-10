@@ -7,6 +7,7 @@ import 'package:level/firebase_options.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
+import 'package:level/services/auth_service.dart';
 import 'package:level/services/daily_quest_service.dart';
 import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
@@ -18,10 +19,11 @@ void main() async {
   await Hive.openBox('settings');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseApi().initNotifications();
+
+  await AuthService().getOrCreateUser();
   await UserService().createUserIfNotExist();
   await DailyQuestService().createDailyQuestIfNotExist();
-
-  // UserService().createTestUser();
+  
   await UserService().updateLoginDay();
   await DailyQuestService().clearYesterdayCompletedDailyQuest();
 

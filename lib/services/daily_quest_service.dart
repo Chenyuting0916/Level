@@ -1,14 +1,13 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:level/models/daily_quest.dart';
 import 'package:level/models/daily_quests.dart';
+import 'package:level/services/auth_service.dart';
 
 class DailyQuestService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String userId = AuthService().currentUser!.uid;
 
   Future<DailyQuests?> getDailyQuest() async {
-    String? userId = await _getId();
     final snapshot =
         await _firestore.collection('dailyQuests').doc(userId).get();
 
@@ -19,7 +18,6 @@ class DailyQuestService {
   }
 
   createDailyQuestIfNotExist() async {
-    String? userId = await _getId();
     final snapshot =
         await _firestore.collection('dailyQuests').doc(userId).get();
 
@@ -39,7 +37,6 @@ class DailyQuestService {
   }
 
   Future updateDailyQuest(Map<String, dynamic> updateData) async {
-    String? userId = await _getId();
     final snapshot = _firestore.collection('dailyQuests').doc(userId);
 
     snapshot.update(updateData);
@@ -69,18 +66,6 @@ class DailyQuestService {
     dailyQuest!.dailyQuests
         .add(DailyQuest(dailyQuestName: questName, isCompleted: false));
     await updateDailyQuest(dailyQuest.toMap());
-  }
-
-  Future<String?> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor;
-    } else if (Platform.isAndroid) {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId;
-    }
-    return null;
   }
 
   Future editDailyQuest(int index, String questName) async {

@@ -11,7 +11,7 @@ class RankingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<List<User>>(
+      body: StreamBuilder<List<MyUser>>(
         stream: UserService().getRankedUsers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -56,7 +56,7 @@ class RankingPage extends StatelessWidget {
     );
   }
 
-  Widget buildUser(User user, BuildContext context) {
+  Widget buildUser(MyUser user, BuildContext context) {
     final minutes = (user.seconds / 60).toStringAsFixed(2);
 
     return ListTile(

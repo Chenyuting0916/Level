@@ -4,9 +4,9 @@ import 'package:level/models/user.dart';
 import 'package:localization/localization.dart';
 
 class AllStatus extends StatelessWidget {
-  final User user;
+  final MyUser user;
   final int? categoryId;
-  final User oldUser;
+  final MyUser oldUser;
   const AllStatus(
       {super.key,
       required this.user,

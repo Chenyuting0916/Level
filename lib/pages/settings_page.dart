@@ -71,6 +71,18 @@ class _SettingsPageState extends State<SettingsPage> {
               onPressed: watchAds,
               buttonBackgroundColor: Theme.of(context).colorScheme.primary,
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "BindAccount".i18n(),
+              style: const TextStyle(fontSize: 18),
+            ),
+            MyButton(
+              buttonChild: Text("SignInWithGoogle".i18n()),
+              onPressed: () {},
+              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ],
         ),
       ),
@@ -116,6 +128,5 @@ class _SettingsPageState extends State<SettingsPage> {
     // final allOffers = await PurchaseApi.fetchOffers();
   }
 
-  void watchAds() {
-  }
+  void watchAds() {}
 }

@@ -93,7 +93,7 @@ class _MyTimerState extends State<MyTimer> {
       builder: (context) => MyDialog(
           title: "SureToStop".i18n(),
           onYesPressed: () async {
-            User oldUser = await StatusService()
+            MyUser oldUser = await StatusService()
                 .updateStatus(widget.categoryId, duration.inSeconds);
             if (!context.mounted) return;
             Navigator.of(context).push(PageRouteBuilder(

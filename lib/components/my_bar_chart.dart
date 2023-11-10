@@ -4,7 +4,7 @@ import 'package:level/models/user.dart';
 import 'package:level/services/status_service.dart';
 
 class _BarChart extends StatelessWidget {
-  final User user;
+  final MyUser user;
   final Color color;
   const _BarChart({required this.color, required this.user});
 
@@ -221,7 +221,7 @@ class _BarChart extends StatelessWidget {
 }
 
 class MyBarChart extends StatefulWidget {
-  final User user;
+  final MyUser user;
   const MyBarChart({super.key, required this.user});
 
   @override

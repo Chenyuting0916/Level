@@ -1,4 +1,4 @@
-class User {
+class MyUser {
   final String? userId;
   final String username;
   final int level;
@@ -15,8 +15,10 @@ class User {
   final int loginDays;
   final DateTime lastLoginDay;
   final String imageUrl;
+  final int weekStudySeconds;
+  final int monthStudySeconds;
 
-  User(
+  MyUser(
       {required this.userId,
       required this.username,
       required this.level,
@@ -32,7 +34,9 @@ class User {
       required this.seconds,
       required this.loginDays,
       required this.lastLoginDay,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.weekStudySeconds,
+      required this.monthStudySeconds});
 
   Map<String, dynamic> toMap() {
     return {
@@ -52,10 +56,12 @@ class User {
       "loginDays": loginDays,
       "lastLoginDay": lastLoginDay,
       "imageUrl": imageUrl,
+      "monthStudySeconds": monthStudySeconds,
+      "weekStudySeconds": weekStudySeconds
     };
   }
 
-  static User fromJson(Map<String, dynamic> json) => User(
+  static MyUser fromJson(Map<String, dynamic> json) => MyUser(
       userId: json['userId'] ?? '',
       username: json['username'] ?? '',
       level: json['level'] ?? 0,
@@ -71,5 +77,7 @@ class User {
       exp: json['exp'] ?? 1,
       loginDays: json['loginDays'] ?? 1,
       lastLoginDay: json['lastLoginDay']?.toDate() ?? DateTime.now(),
-      imageUrl: json['imageUrl'] ?? "");
+      imageUrl: json['imageUrl'] ?? "",
+      weekStudySeconds: json['weekStudySeconds'] ?? 0,
+      monthStudySeconds: json['monthStudySeconds'] ?? 0);
 }

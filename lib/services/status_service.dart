@@ -6,8 +6,8 @@ import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 
 class StatusService {
-  Future<User> updateStatus(int categoryId, int learningSeconds) async {
-    User? oldUser = await UserService().getCurrentUser();
+  Future<MyUser> updateStatus(int categoryId, int learningSeconds) async {
+    MyUser? oldUser = await UserService().getCurrentUser();
 
     Map<String, dynamic> updatedData = {};
     if (learningSeconds >= 600) {
@@ -21,7 +21,7 @@ class StatusService {
     return oldUser;
   }
 
-  Map<String, int> levelUp(User user, int learningSeconds) {
+  Map<String, int> levelUp(MyUser user, int learningSeconds) {
     int maxExp = Level(level: user.level, currentExp: user.exp).maxExp;
     int addExp = getAddExp(learningSeconds);
     if (addExp + user.exp >= maxExp) {
@@ -30,7 +30,7 @@ class StatusService {
     return {"exp": addExp + user.exp};
   }
 
-  Map<String, int> updateStatusByCategory(int categoryId, User? user) {
+  Map<String, int> updateStatusByCategory(int categoryId, MyUser? user) {
     if (user == null) return {};
     Map<String, int> results = {};
     switch (Category.getCategoryEnum(categoryId)) {
