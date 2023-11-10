@@ -78,25 +78,22 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                   ),
                 ]),
               ),
-              floatingActionButton: Visibility(
-                visible: dailyQuests.dailyQuests.length <= 3,
-                child: AnimatedFloatingActionButton(
-                  fabButtons: [
-                    MyHint(hintMessage: 'DailyQuestHint'.i18n()),
-                    FloatingActionButton(
-                      heroTag: "NewQuestDialog",
-                      onPressed: addNewQuestDialog,
-                      child: Icon(
-                        Icons.add,
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                    )
-                  ],
-                  key: key,
-                  animatedIconData: AnimatedIcons.menu_close,
-                  colorStartAnimation: Theme.of(context).colorScheme.secondary,
-                  colorEndAnimation: Theme.of(context).colorScheme.secondary,
-                ),
+              floatingActionButton: AnimatedFloatingActionButton(
+                fabButtons: [
+                  MyHint(hintMessage: 'DailyQuestHint'.i18n()),
+                  FloatingActionButton(
+                    heroTag: "NewQuestDialog",
+                    onPressed: addNewQuestDialog,
+                    child: Icon(
+                      Icons.add,
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                  )
+                ],
+                key: key,
+                animatedIconData: AnimatedIcons.menu_close,
+                colorStartAnimation: Theme.of(context).colorScheme.secondary,
+                colorEndAnimation: Theme.of(context).colorScheme.secondary,
               ),
             );
           } else {
