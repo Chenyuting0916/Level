@@ -49,5 +49,6 @@
     "DailyQuest": "Daily Quest",
     "Daily": "Daily",
     "DailyQuestHint": "Swipe left to delete daily quest",
-    "RankLevel": "Lv: %s"
+    "RankLevel": "Lv: %s",
+    "SureToDeleteQuest": "Do you sure you want to delete this quest?"
 }

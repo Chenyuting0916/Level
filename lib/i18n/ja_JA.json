@@ -49,5 +49,6 @@
     "DailyQuest": "デイリーミッション",
     "Daily": "デイリー",
     "DailyQuestHint": "左にスワイプしてデイリーミッションを削除します",
-    "RankLevel": "Lv: %s"
+    "RankLevel": "Lv: %s",
+    "SureToDeleteQuest": "このミッションを削除してもよろしいですか?"
 }
