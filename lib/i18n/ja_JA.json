@@ -48,7 +48,7 @@
     "EnterYourDailyQuest": "デイリーミッションを入力してください",
     "DailyQuest": "デイリーミッション",
     "Daily": "デイリー",
-    "DailyQuestHint": "左にスワイプしてデイリーミッションを削除します",
+    "DailyQuestHint": "1. 左にスワイプして毎日のタスクを編集または削除します\n2. カレンダーを使用して、将来行う必要があることを計画します",
     "RankLevel": "Lv: %s",
     "SureToDeleteQuest": "このミッションを削除してもよろしいですか?"
 }

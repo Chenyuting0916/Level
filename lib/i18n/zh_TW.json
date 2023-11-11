@@ -48,7 +48,7 @@
     "EnterYourDailyQuest": "請輸入您的每日任務",
     "DailyQuest": "每日任務",
     "Daily": "每日",
-    "DailyQuestHint": "左滑每日任務可以刪除",
+    "DailyQuestHint": "1. 左滑每日任務可以編輯或刪除\n2. 行事曆可以計畫會來需要做的事",
     "RankLevel": "Lv: %s",
     "SureToDeleteQuest": "您確定要刪除此任務嗎？"
 }

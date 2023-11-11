@@ -48,7 +48,7 @@
     "EnterYourDailyQuest": "Please Enter Your Daily Quest",
     "DailyQuest": "Daily Quest",
     "Daily": "Daily",
-    "DailyQuestHint": "Swipe left to delete daily quest",
+    "DailyQuestHint": "1. Swipe left to edit or delete daily tasks\n2. Use the calendar to plan what needs to be done in the future",
     "RankLevel": "Lv: %s",
     "SureToDeleteQuest": "Do you sure you want to delete this quest?"
 }

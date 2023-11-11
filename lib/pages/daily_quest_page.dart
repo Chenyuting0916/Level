@@ -9,6 +9,7 @@ import 'package:level/components/my_title.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/daily_quests.dart';
 import 'package:level/pages/home_page.dart';
+import 'package:level/pages/plan_page.dart';
 import 'package:level/services/daily_quest_service.dart';
 import 'package:localization/localization.dart';
 
@@ -66,11 +67,13 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                           isCompleted:
                               dailyQuests.dailyQuests[index].isCompleted,
                           onChanged: (value) => checkBoxTapped(value, index),
-                          editOnPressed: (context) => editQuestDialog(index, dailyQuests.dailyQuests[index].dailyQuestName),
+                          editOnPressed: (context) => editQuestDialog(index,
+                              dailyQuests.dailyQuests[index].dailyQuestName),
                           deleteOnPressed: (context) =>
                               deleteQuestDialog(index),
                           questOnTapped: () {
-                            editQuestDialog(index, dailyQuests.dailyQuests[index].dailyQuestName);
+                            editQuestDialog(index,
+                                dailyQuests.dailyQuests[index].dailyQuestName);
                           },
                         );
                       },
@@ -80,6 +83,14 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
               ),
               floatingActionButton: AnimatedFloatingActionButton(
                 fabButtons: [
+                  FloatingActionButton(
+                    heroTag: "Plan",
+                    onPressed: goToPlanPage,
+                    child: Icon(
+                      Icons.calendar_month_rounded,
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                  ),
                   MyHint(hintMessage: 'DailyQuestHint'.i18n()),
                   FloatingActionButton(
                     heroTag: "NewQuestDialog",
@@ -174,5 +185,13 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                 Navigator.of(context).pop();
               });
         });
+  }
+
+  void goToPlanPage() {
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, _) {
+        return const PlanPage();
+      },
+    ));
   }
 }
