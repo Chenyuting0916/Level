@@ -66,11 +66,11 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                           isCompleted:
                               dailyQuests.dailyQuests[index].isCompleted,
                           onChanged: (value) => checkBoxTapped(value, index),
-                          editOnPressed: (context) => editQuestDialog(index),
+                          editOnPressed: (context) => editQuestDialog(index, dailyQuests.dailyQuests[index].dailyQuestName),
                           deleteOnPressed: (context) =>
                               deleteQuestDialog(index),
                           questOnTapped: () {
-                            editQuestDialog(index);
+                            editQuestDialog(index, dailyQuests.dailyQuests[index].dailyQuestName);
                           },
                         );
                       },
@@ -127,10 +127,11 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
         });
   }
 
-  editQuestDialog(int index) async {
+  editQuestDialog(int index, String dailyQuestName) async {
     showDialog(
         context: context,
         builder: (context) {
+          textController.text = dailyQuestName;
           return MyDialogWithTextField(
               controller: textController,
               title: "EnterYourDailyQuest".i18n(),
