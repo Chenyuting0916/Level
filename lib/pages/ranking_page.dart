@@ -6,56 +6,70 @@ import 'package:level/components/my_row_status.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:localization/localization.dart';
 
-class RankingPage extends StatelessWidget {
+class RankingPage extends StatefulWidget {
   const RankingPage({super.key});
+
+  @override
+  State<RankingPage> createState() => _RankingPageState();
+}
+
+class _RankingPageState extends State<RankingPage> {
+  String filter = 'level';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<List<MyUser>>(
-        stream: UserService().getRankedUsers(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Text("Error: ${snapshot.error}");
-          } else if (snapshot.hasData) {
-            final rankedUsers = snapshot.data!;
+      body: LiquidPullToRefresh(
+        onRefresh: _handleRefresh,
+        child: FutureBuilder<List<MyUser>>(
+          future: UserService().getRankedUsers(filter),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Text("Error: ${snapshot.error}");
+            } else if (snapshot.hasData) {
+              final rankedUsers = snapshot.data!;
 
-            return Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-              child: ListView(
-                children: [
-                  MyTitle(
-                      title: "Rank".i18n(),
-                      titleIcon: const Icon(Icons.bar_chart_outlined)),
-                  const MyDivider(),
-                  const MyRankHeader(),
-                  ...rankedUsers
-                      .map((user) => buildUser(user, context))
-                      .toList(),
-                ],
-              ),
-            );
-          } else {
-            return Padding(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-              child: ListView(
-                children: [
-                  MyTitle(
-                      title: "Rank".i18n(),
-                      titleIcon: const Icon(Icons.bar_chart_outlined)),
-                  const MyDivider(),
-                  Text("NoDataFound".i18n()),
-                ],
-              ),
-            );
-          }
-        },
+              return Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: ListView(
+                  children: [
+                    MyTitle(
+                        title: "Rank".i18n(),
+                        titleIcon: const Icon(Icons.bar_chart_outlined)),
+                    const MyDivider(),
+                    MyRankHeader(
+                      onTap: changeFilter,
+                      currentSelected: filter,
+                    ),
+                    ...rankedUsers
+                        .map((user) => buildUser(user, context))
+                        .toList(),
+                  ],
+                ),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: ListView(
+                  children: [
+                    MyTitle(
+                        title: "Rank".i18n(),
+                        titleIcon: const Icon(Icons.bar_chart_outlined)),
+                    const MyDivider(),
+                    Text("NoDataFound".i18n()),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -110,7 +124,9 @@ class RankingPage extends StatelessWidget {
                           buttonBackgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           buttonChild: Text("Confirm".i18n()),
-                          onPressed: () {Navigator.of(context).pop();}),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
                     ],
                   );
                 });
@@ -149,5 +165,15 @@ class RankingPage extends StatelessWidget {
             style: const TextStyle(fontSize: 14),
           )),
     );
+  }
+
+  changeFilter(value) {
+    setState(() {
+      filter = value;
+    });
+  }
+
+  Future<void> _handleRefresh() async {
+    await UserService().getRankedUsers(filter);
   }
 }

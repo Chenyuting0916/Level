@@ -70,28 +70,28 @@ class _BarChart extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = StatusCategory.all[0];
+        text = StatusCategory.all[0].translationShortName;
         break;
       case 1:
-        text = StatusCategory.all[1];
+        text = StatusCategory.all[1].translationShortName;
         break;
       case 2:
-        text = StatusCategory.all[2];
+        text = StatusCategory.all[2].translationShortName;
         break;
       case 3:
-        text = StatusCategory.all[3];
+        text = StatusCategory.all[3].translationShortName;
         break;
       case 4:
-        text = StatusCategory.all[4];
+        text = StatusCategory.all[4].translationShortName;
         break;
       case 5:
-        text = StatusCategory.all[5];
+        text = StatusCategory.all[5].translationShortName;
         break;
       case 6:
-        text = StatusCategory.all[6];
+        text = StatusCategory.all[6].translationShortName;
         break;
       case 7:
-        text = StatusCategory.all[7];
+        text = StatusCategory.all[7].translationShortName;
         break;
       default:
         text = '';

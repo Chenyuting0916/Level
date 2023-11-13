@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:level/components/my_rank_category.dart';
 import 'package:level/models/status_category.dart';
-import 'package:localization/localization.dart';
 
 class MyRankHeader extends StatefulWidget {
-  const MyRankHeader({super.key});
+  const MyRankHeader(
+      {super.key, required this.onTap, required this.currentSelected});
+  final String currentSelected;
+  final Function(dynamic) onTap;
 
   @override
   State<MyRankHeader> createState() => _MyRankHeaderState();
@@ -26,15 +28,17 @@ class _MyRankHeaderState extends State<MyRankHeader> {
                 shrinkWrap: true,
                 children: [
                   MyRankCategory(
-                      categoryName: 'Level'.i18n(),
-                      isSelected: true,
-                      onTap: () {},
-                    ),
+                    categoryName: 'Level',
+                    isSelected: isSelected('level'),
+                    onTap: widget.onTap,
+                    filterName: 'level',
+                  ),
                   ...StatusCategory.all.map((category) {
                     return MyRankCategory(
-                      categoryName: category.i18n(),
-                      isSelected: false,
-                      onTap: () {},
+                      categoryName: category.translationShortName,
+                      isSelected: isSelected(category.databaseName),
+                      onTap: widget.onTap,
+                      filterName: category.databaseName,
                     );
                   }),
                 ],
@@ -44,5 +48,9 @@ class _MyRankHeaderState extends State<MyRankHeader> {
         ),
       ],
     );
+  }
+
+  isSelected(String category) {
+    return widget.currentSelected == category;
   }
 }

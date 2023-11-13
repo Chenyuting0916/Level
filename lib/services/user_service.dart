@@ -40,15 +40,17 @@ class UserService {
     return await getUser(userId);
   }
 
-  Stream<List<MyUser>> getRankedUsers() {
-    return _firestore
-        .collection('users')
-        .orderBy("level", descending: true)
-        .limit(10)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => MyUser.fromJson(doc.data())).toList());
-  }
+Future<List<MyUser>> getRankedUsers(String filter) async {
+  List<QueryDocumentSnapshot> docs = await _firestore
+      .collection('users')
+      .orderBy(filter, descending: true)
+      .limit(10)
+      .get()
+      .then((QuerySnapshot snapshot) => snapshot.docs);
+
+  List<MyUser> users = docs.map((doc) => MyUser.fromJson(doc.data() as Map<String, dynamic>)).toList();
+  return users;
+}
 
   Future updateUser(Map<String, dynamic> updateData) async {
     final snapshot = _firestore.collection('users').doc(userId);

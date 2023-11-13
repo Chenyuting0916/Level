@@ -5,6 +5,7 @@ import 'package:level/pages/profile_page.dart';
 import 'package:level/pages/ranking_page.dart';
 import 'package:level/pages/settings_page.dart';
 import 'package:level/pages/timer_page.dart';
+import 'package:level/services/daily_quest_service.dart';
 import 'package:localization/localization.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,7 +33,8 @@ class _HomePageState extends State<HomePage> {
     const SettingsPage(),
   ];
 
-  void _navigateBottomBar(int index) {
+  Future<void> _navigateBottomBar(int index) async {
+    await DailyQuestService().clearYesterdayCompletedDailyQuest();
     setState(() {
       _selectedIndex = index;
     });
