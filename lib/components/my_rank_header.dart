@@ -33,6 +33,12 @@ class _MyRankHeaderState extends State<MyRankHeader> {
                     onTap: widget.onTap,
                     filterName: 'level',
                   ),
+                  MyRankCategory(
+                    categoryName: 'Time',
+                    isSelected: isSelected('seconds'),
+                    onTap: widget.onTap,
+                    filterName: 'seconds',
+                  ),
                   ...StatusCategory.all.map((category) {
                     return MyRankCategory(
                       categoryName: category.translationShortName,
