@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:level/models/status_category.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/status_service.dart';
 
@@ -69,28 +70,28 @@ class _BarChart extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = 'STR';
+        text = StatusCategory.all[0];
         break;
       case 1:
-        text = 'INT';
+        text = StatusCategory.all[1];
         break;
       case 2:
-        text = 'WIS';
+        text = StatusCategory.all[2];
         break;
       case 3:
-        text = 'AGI';
+        text = StatusCategory.all[3];
         break;
       case 4:
-        text = 'LUK';
+        text = StatusCategory.all[4];
         break;
       case 5:
-        text = 'VIT';
+        text = StatusCategory.all[5];
         break;
       case 6:
-        text = 'PS';
+        text = StatusCategory.all[6];
         break;
       case 7:
-        text = 'FQ';
+        text = StatusCategory.all[7];
         break;
       default:
         text = '';

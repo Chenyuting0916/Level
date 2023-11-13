@@ -1,6 +1,5 @@
 import 'dart:math';
-
-import 'package:level/models/category.dart';
+import 'package:level/models/study_category.dart';
 import 'package:level/models/level.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
@@ -37,7 +36,7 @@ class StatusService {
   Map<String, int> updateStatusByCategory(int categoryId, MyUser? user) {
     if (user == null) return {};
     Map<String, int> results = {};
-    switch (Category.getCategoryEnum(categoryId)) {
+    switch (StudyCategory.getCategoryEnum(categoryId)) {
       case CategoryName.exercises:
         results.addEntries({
           "strength": user.strength + 3,

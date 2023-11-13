@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 
-class Category {
+class StudyCategory {
   static final all = [
-    Category(
+    StudyCategory(
         id: 1,
         name: 'Exercises',
         icon: const Icon(Icons.directions_walk_sharp)),
-    Category(id: 2, name: 'Study', icon: const Icon(Icons.school)),
-    Category(
+    StudyCategory(id: 2, name: 'Study', icon: const Icon(Icons.school)),
+    StudyCategory(
         id: 3,
         name: 'Mindfulness',
         icon: const Icon(Icons.terrain_rounded)),
-    Category(id: 4, name: 'Art', icon: const Icon(Icons.bubble_chart)),
-    Category(
+    StudyCategory(id: 4, name: 'Art', icon: const Icon(Icons.bubble_chart)),
+    StudyCategory(
         id: 5,
         name: 'Work',
         icon: const Icon(Icons.attach_money_rounded)),
-    Category(id: 6, name: 'Code', icon: const Icon(Icons.code)),
-    Category(
+    StudyCategory(id: 6, name: 'Code', icon: const Icon(Icons.code)),
+    StudyCategory(
         id: 7, name: 'LearnLanguage', icon: const Icon(Icons.language)),
-    Category(
+    StudyCategory(
         id: 8,
         name: 'StartABusiness',
         icon: const Icon(Icons.business_sharp)),
-    Category(
+    StudyCategory(
         id: 9,
         name: 'FinancialLiteracy',
         icon: const Icon(Icons.credit_card)),
@@ -33,7 +33,7 @@ class Category {
   final String name;
   final Icon icon;
 
-  Category({required this.id, required this.name, required this.icon});
+  StudyCategory({required this.id, required this.name, required this.icon});
 
   static final Map<int, CategoryName> _map = {
     1: CategoryName.exercises,

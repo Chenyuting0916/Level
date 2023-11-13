@@ -37,12 +37,7 @@ class UserService {
   }
 
   Future<MyUser?> getCurrentUser() async {
-    final snapshot = await _firestore.collection('users').doc(userId).get();
-
-    if (snapshot.exists) {
-      return MyUser.fromJson(snapshot.data()!);
-    }
-    return null;
+    return await getUser(userId);
   }
 
   Stream<List<MyUser>> getRankedUsers() {
@@ -76,5 +71,14 @@ class UserService {
 
     await updateUser(
         {"lastLoginDay": DateTime.now(), "loginDays": user.loginDays + 1});
+  }
+
+  Future<MyUser?> getUser(String? id) async {
+    final snapshot = await _firestore.collection('users').doc(id).get();
+
+    if (snapshot.exists) {
+      return MyUser.fromJson(snapshot.data()!);
+    }
+    return null;
   }
 }
