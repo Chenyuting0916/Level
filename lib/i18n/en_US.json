@@ -40,6 +40,8 @@
     "Result": "Result",
     "Confirm": "Confirm",
     "TimeSpend": "Time Spend: %s minutes",
+    "WeekTimeSpend": "this week: %s minutes",
+    "MonthTimeSpend": "this month: %s minutes",
     "LongerThanTen": "You have to focus for more than 10 minutes to gain experience points.",
     "NoDataFound": "No Data Found :(",
     "SureToStopWithoutExp": "Are you sure you want to leave? \n(No experience points will be gained!!)",

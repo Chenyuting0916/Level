@@ -14,6 +14,10 @@ class StatusService {
       updatedData
           .addEntries(updateStatusByCategory(categoryId, oldUser).entries);
       updatedData["seconds"] = oldUser!.seconds + learningSeconds;
+      updatedData["monthStudySeconds"] =
+          oldUser.monthStudySeconds + learningSeconds;
+      updatedData["weekStudySeconds"] =
+          oldUser.weekStudySeconds + learningSeconds;
     }
     updatedData.addEntries(levelUp(oldUser!, learningSeconds).entries);
     UserService().updateUser(updatedData);

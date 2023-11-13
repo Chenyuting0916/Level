@@ -27,6 +27,8 @@ class ProfilePage extends StatelessWidget {
         } else if (snapshot.hasData) {
           final user = snapshot.data!;
           final minutes = (user.seconds / 60).toStringAsFixed(2);
+          final weekMinutes = (user.weekStudySeconds / 60).toStringAsFixed(2);
+          final monthMinutes = (user.monthStudySeconds / 60).toStringAsFixed(2);
 
           return Scaffold(
             body: Padding(
@@ -80,6 +82,12 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           Text(
                             "TimeSpend".i18n([minutes]),
+                          ),
+                          Text(
+                            "MonthTimeSpend".i18n([monthMinutes]),
+                          ),
+                          Text(
+                            "WeekTimeSpend".i18n([weekMinutes]),
                           ),
                           Text(
                             "LoginDays".i18n([user.loginDays.toString()]),

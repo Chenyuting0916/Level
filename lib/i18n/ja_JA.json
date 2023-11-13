@@ -40,6 +40,8 @@
     "Result": "Result",
     "Confirm": "完了",
     "TimeSpend": "合計学習時間: %s 分",
+    "WeekTimeSpend": "今週の学習時間: %s 分",
+    "MonthTimeSpend": "今月の学習時間: %s 分",
     "LongerThanTen": "経験値を獲得するには10分以上集中する必要があります。",
     "NoDataFound": "No Data Found :(",
     "SureToStopWithoutExp": "本当に退会してもよろしいですか? \n（経験値は得られません!!）",
