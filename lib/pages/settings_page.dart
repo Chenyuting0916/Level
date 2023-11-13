@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:level/components/my_button.dart';
 import 'package:level/components/my_hint.dart';
 import 'package:level/models/language.dart';
@@ -6,6 +7,7 @@ import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
+import 'package:level/services/ad_mob_service.dart';
 import 'package:level/services/local_storage_service.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,15 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   bool _isLightMode = LocalStorageService().getData("LightMode");
+  late AdMobService _adMobService;
+  RewardedAd? _rewardedAd;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _adMobService = context.read<AdMobService>();
+    _createRewardAd();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(
-              height: 15,
+              height: 10,
             ),
             MyButton(
               buttonChild: Text("ChooseYourPlan".i18n()),
@@ -77,6 +88,9 @@ class _SettingsPageState extends State<SettingsPage> {
             Text(
               "BindAccount".i18n(),
               style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             MyButton(
               buttonChild: Text("SignInWithGoogle".i18n()),
@@ -128,5 +142,34 @@ class _SettingsPageState extends State<SettingsPage> {
     // final allOffers = await PurchaseApi.fetchOffers();
   }
 
-  void watchAds() {}
+  void _createRewardAd() {
+    RewardedAd.load(
+        adUnitId: _adMobService.rewardedAdUnitId!,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (ad) {
+            debugPrint('$ad loaded.');
+            _rewardedAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('RewardedAd failed to load: $error');
+          },
+        ));
+  }
+
+  void watchAds() {
+    if (_rewardedAd != null) {
+      _rewardedAd!.fullScreenContentCallback =
+          FullScreenContentCallback(onAdDismissedFullScreenContent: (ad) {
+        ad.dispose();
+        _createRewardAd();
+      }, onAdFailedToShowFullScreenContent: ((ad, error) {
+        ad.dispose();
+        _createRewardAd();
+      }));
+      _rewardedAd!.show(onUserEarnedReward: ((ad, reward) {
+        //reward user here
+      }));
+    }
+  }
 }

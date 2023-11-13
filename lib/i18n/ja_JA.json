@@ -52,5 +52,11 @@
     "Daily": "デイリー",
     "DailyQuestHint": "1. 左にスワイプして毎日のタスクを編集または削除します\n2. カレンダーを使用して、将来行う必要があることを計画します",
     "RankLevel": "Lv: %s",
-    "SureToDeleteQuest": "このミッションを削除してもよろしいですか?"
+    "SureToDeleteQuest": "このミッションを削除してもよろしいですか?",
+    "SupportUs": "サポートする:",
+    "ChooseYourPlan": "プランを選択",
+    "WatchAds": "広告を見る",
+    "BindAccount": "アカウント設定:",
+    "SignInWithGoogle": "Googleアカウントでサインイン",
+    "AuthorBeggingForMoney": "広告を見てもらうことで私をサポートできます。あなたの貢献が私を更新するモチベーションになります。"
 }
