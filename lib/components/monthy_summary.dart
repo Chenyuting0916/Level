@@ -7,20 +7,17 @@ class MonthlySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 25.0),
-      child: HeatMapCalendar(
-          datasets: datasets,
-          fontSize: 10,
-          size: 25,
-          initDate: DateTime.now(),
-          colorMode: ColorMode.opacity,
-          textColor: Theme.of(context).colorScheme.tertiary,
-          defaultColor: Theme.of(context).colorScheme.primary,
-          colorsets: const {
-            1: Colors.green,
-          },
-          showColorTip: false),
-    );
+    return HeatMapCalendar(
+        datasets: datasets,
+        fontSize: 10,
+        size: 25,
+        initDate: DateTime.now(),
+        colorMode: ColorMode.opacity,
+        textColor: Theme.of(context).colorScheme.tertiary,
+        defaultColor: Theme.of(context).colorScheme.primary,
+        colorsets: const {
+          1: Colors.green,
+        },
+        showColorTip: false);
   }
 }

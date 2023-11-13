@@ -28,7 +28,7 @@ class _QuestTileState extends State<QuestTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: Slidable(
         endActionPane: ActionPane(motion: const StretchMotion(), children: [
           SlidableAction(
@@ -47,7 +47,7 @@ class _QuestTileState extends State<QuestTile> {
         child: InkWell(
           onTap: widget.questOnTapped,
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(8.0),
