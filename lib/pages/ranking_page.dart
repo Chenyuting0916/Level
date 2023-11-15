@@ -40,7 +40,7 @@ class _RankingPageState extends State<RankingPage> {
                 child: ListView(
                   children: [
                     MyTitle(
-                        title: "Rank".i18n(),
+                        title: "Rank".i18n() + " - $filter".i18n(),
                         titleIcon: const Icon(Icons.bar_chart_outlined)),
                     const MyDivider(),
                     MyRankHeader(
