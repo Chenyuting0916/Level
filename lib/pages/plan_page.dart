@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:level/components/my_appbar.dart';
 import 'package:level/components/my_dialog_with_textfield.dart';
+import 'package:level/components/quest_tile.dart';
 import 'package:level/models/event.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/providers/locale_provider.dart';
@@ -24,7 +25,7 @@ class _PlanPageState extends State<PlanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppbar(
-          appbarTitle: "BackToQuestPage".i18n(),
+          appbarTitle: "FuturePlan".i18n(),
           onPressed: () {
             Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (context, animation, _) {
@@ -45,7 +46,7 @@ class _PlanPageState extends State<PlanPage> {
               } else if (snapshot.hasData) {
                 events = snapshot.data!;
 
-                return Column(
+                return ListView(
                   children: [
                     TableCalendar(
                       daysOfWeekHeight: 20,
@@ -64,20 +65,27 @@ class _PlanPageState extends State<PlanPage> {
                       ),
                       eventLoader: _listOfEvents,
                       calendarBuilders: CalendarBuilders(
-                        singleMarkerBuilder: (context, date, _) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .tertiary), //change color
-                            width: 5.0,
-                            height: 5.0,
-                            margin: const EdgeInsets.symmetric(horizontal: 1.5),
-                          );
-                        }
-                      ),
+                          singleMarkerBuilder: (context, date, _) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context).colorScheme.tertiary),
+                          width: 5.0,
+                          height: 5.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                        );
+                      }),
                     ),
+                    ...events
+                    .where((element) =>  isSameDay(element.eventDate, _selectedDay))
+                        .map((e) => QuestTile(
+                            questName: e.eventName,
+                            isCompleted: false,
+                            onChanged: (f) {},
+                            editOnPressed: (f) {},
+                            deleteOnPressed: (f) {},
+                            questOnTapped: () {}))
+                        .toList(),
                   ],
                 );
               } else {

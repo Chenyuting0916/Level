@@ -44,32 +44,32 @@ class _QuestTileState extends State<QuestTile> {
                 topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
           ),
         ]),
-        child: InkWell(
-          onTap: widget.questOnTapped,
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Row(
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                        checkColor: const Color.fromARGB(221, 37, 37, 37),
-                        activeColor: Colors.green.shade300,
-                        value: widget.isCompleted,
-                        onChanged: widget.onChanged),
-                    Text(widget.questName,
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Row(
+            children: [
+              Row(
+                children: [
+                  Checkbox(
+                      checkColor: const Color.fromARGB(221, 37, 37, 37),
+                      activeColor: Colors.green.shade300,
+                      value: widget.isCompleted,
+                      onChanged: widget.onChanged),
+                  InkWell(
+                    onTap: widget.questOnTapped,
+                    child: Text(widget.questName,
                         style: TextStyle(
                             decoration: widget.isCompleted
                                 ? TextDecoration.lineThrough
                                 : TextDecoration.none)),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
