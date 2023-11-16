@@ -13,6 +13,14 @@ class MyRankHeader extends StatefulWidget {
 }
 
 class _MyRankHeaderState extends State<MyRankHeader> {
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    jumpToOffset();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,6 +34,7 @@ class _MyRankHeaderState extends State<MyRankHeader> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
+                controller: scrollController,
                 children: [
                   MyRankCategory(
                     categoryName: 'Level',
@@ -58,5 +67,19 @@ class _MyRankHeaderState extends State<MyRankHeader> {
 
   isSelected(String category) {
     return widget.currentSelected == category;
+  }
+
+  jumpToOffset() {
+    scrollController = ScrollController(
+      initialScrollOffset: [
+        "luck",
+        "vitality",
+        "professionalSkill",
+        "financialQuotient"
+      ].contains(widget.currentSelected)
+          ? 200
+          : 0,
+      keepScrollOffset: true,
+    );
   }
 }
