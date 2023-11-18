@@ -11,6 +11,7 @@ import 'package:level/providers/theme_provider.dart';
 import 'package:level/services/ad_mob_service.dart';
 import 'package:level/services/auth_service.dart';
 import 'package:level/services/daily_quest_service.dart';
+import 'package:level/services/fake_scheduler_service.dart';
 import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +28,11 @@ void main() async {
   await AuthService().getOrCreateUser();
   await UserService().createUserIfNotExist();
   await DailyQuestService().createDailyQuestIfNotExist();
+  await FakeSchedulerService().createReloadDaysIfNotExist();
   
   await UserService().updateLoginDay();
   await DailyQuestService().clearYesterdayCompletedDailyQuest();
+  await FakeSchedulerService().resetDataIfNeeded();
 
   runApp(MultiProvider(
     providers: [
