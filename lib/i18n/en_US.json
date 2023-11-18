@@ -60,5 +60,8 @@
     "SignInWithGoogle": "Connect your account with google",
     "AuthorBeggingForMoney": "You can also help me by watching ads. Your contribution is the motivation for me to update.",
     "Level": "Level",
-    "Time": "Time"
+    "Time": "Time",
+    "FuturePlan": "Future Plan",
+    "EnterYourPlan": "Enter Your Plan",
+    "SureToDeleteEvent": "Are you sure you want to delete the event?"
 }

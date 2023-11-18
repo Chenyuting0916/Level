@@ -60,5 +60,8 @@
     "SignInWithGoogle": "綁定你的google帳號",
     "AuthorBeggingForMoney": "您也可以看廣告幫助我，您的付出是我更新的動力",
     "Level": "等級",
-    "Time": "時間"
+    "Time": "時間",
+    "FuturePlan": "未來規劃",
+    "EnterYourPlan": "輸入當天要做的事",
+    "SureToDeleteEvent": "確定要刪除事件嗎?"
 }

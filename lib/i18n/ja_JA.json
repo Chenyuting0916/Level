@@ -60,5 +60,8 @@
     "SignInWithGoogle": "Googleアカウントでサインイン",
     "AuthorBeggingForMoney": "広告を見てもらうことで私をサポートできます。あなたの貢献が私を更新するモチベーションになります。",
     "Level": "レベル",
-    "Time": "時間"
+    "Time": "時間",
+    "FuturePlan": "未来の計画",
+    "EnterYourPlan": "その日にやることを入力",
+    "SureToDeleteEvent": "イベントを削除してもよろしいですか？"
 }
