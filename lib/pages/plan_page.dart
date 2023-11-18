@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:level/components/my_appbar.dart';
+import 'package:level/components/my_dialog.dart';
 import 'package:level/components/my_dialog_with_textfield.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/event.dart';
@@ -77,24 +79,58 @@ class _PlanPageState extends State<PlanPage> {
                       }),
                     ),
                     ...events
-                    .where((element) =>  isSameDay(element.eventDate, _selectedDay))
-                        .map((e) => QuestTile(
+                        .where((element) =>
+                            isSameDay(element.eventDate, _selectedDay))
+                        .mapIndexed((index, e) => QuestTile(
                             questName: e.eventName,
-                            isCompleted: false,
-                            onChanged: (f) {},
-                            editOnPressed: (f) {},
-                            deleteOnPressed: (f) {},
+                            isCompleted: e.isCompleted,
+                            onChanged: (value) => checkBoxTapped(value!, index),
+                            editOnPressed: (context) =>
+                                editPlanDialog(index, e.eventName),
+                            deleteOnPressed: (context) =>
+                                deletePlanDialog(index),
                             questOnTapped: () {}))
                         .toList(),
                   ],
                 );
               } else {
-                return Center(child: Text("NoDataFound".i18n()));
+                return ListView(
+                  children: [
+                    TableCalendar(
+                      daysOfWeekHeight: 20,
+                      locale: LocaleProvider().locale.languageCode,
+                      firstDay: DateTime.utc(2010, 9, 16),
+                      lastDay: DateTime.utc(2030, 11, 28),
+                      focusedDay: _selectedDay,
+                      onDaySelected: _onDaySelected,
+                      selectedDayPredicate: (day) =>
+                          isSameDay(day, _selectedDay),
+                      availableCalendarFormats: const {
+                        CalendarFormat.month: 'Month'
+                      },
+                      headerStyle: const HeaderStyle(
+                        titleCentered: true,
+                      ),
+                      eventLoader: _listOfEvents,
+                      calendarBuilders: CalendarBuilders(
+                          singleMarkerBuilder: (context, date, _) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context).colorScheme.tertiary),
+                          width: 5.0,
+                          height: 5.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                        );
+                      }),
+                    ),
+                  ],
+                );
               }
             }),
         floatingActionButton: FloatingActionButton(
           heroTag: "NewPlanDialog",
-          onPressed: addPlanQuestDialog,
+          onPressed: addPlanDialog,
           child: Icon(
             Icons.add,
             color: Theme.of(context).colorScheme.tertiary,
@@ -108,7 +144,7 @@ class _PlanPageState extends State<PlanPage> {
     });
   }
 
-  void addPlanQuestDialog() async {
+  void addPlanDialog() async {
     showDialog(
         context: context,
         builder: (context) {
@@ -120,14 +156,63 @@ class _PlanPageState extends State<PlanPage> {
                 await PlanEventService()
                     .addEvent(textController.text, _selectedDay);
                 textController.clear();
-                if (!mounted) return;
-                Navigator.of(context).pop();
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               },
               onNoPressed: () {
                 textController.clear();
                 Navigator.of(context).pop();
               });
         });
+  }
+
+  editPlanDialog(int index, String planName) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          textController.text = planName;
+          return MyDialogWithTextField(
+              controller: textController,
+              title: "EnterYourPlan".i18n(),
+              hintText: "EnterYourPlan".i18n(),
+              onYesPressed: () async {
+                await PlanEventService()
+                    .editEvent(_selectedDay, index, textController.text);
+                textController.clear();
+                setState(() {
+                  Navigator.of(context).pop();
+                });
+              },
+              onNoPressed: () {
+                textController.clear();
+                Navigator.of(context).pop();
+              });
+        });
+  }
+
+  deletePlanDialog(int index) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return MyDialog(
+              title: "SureToDeleteEvent".i18n(),
+              onYesPressed: () async {
+                await PlanEventService().deleteEvent(_selectedDay, index);
+                textController.clear();
+                setState(() {
+                  Navigator.of(context).pop();
+                });
+              },
+              onNoPressed: () {
+                Navigator.of(context).pop();
+              });
+        });
+  }
+
+  Future<void> checkBoxTapped(bool value, int index) async {
+    await PlanEventService().completeEvent(_selectedDay, index, value);
+    setState(() {});
   }
 
   List<Event> _listOfEvents(DateTime day) {

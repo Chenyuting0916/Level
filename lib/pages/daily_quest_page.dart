@@ -8,7 +8,6 @@ import 'package:level/components/my_hint.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/daily_quests.dart';
-import 'package:level/pages/home_page.dart';
 import 'package:level/pages/plan_page.dart';
 import 'package:level/services/daily_quest_service.dart';
 import 'package:localization/localization.dart';
@@ -24,15 +23,6 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
   final textController = TextEditingController();
   final GlobalKey<AnimatedFloatingActionButtonState> key =
       GlobalKey<AnimatedFloatingActionButtonState>();
-  Future<void> checkBoxTapped(bool? value, int index) async {
-    await DailyQuestService().completeTask(index, value);
-    if (!mounted) return;
-    Navigator.of(context).push(PageRouteBuilder(
-      pageBuilder: (context, animation, _) {
-        return const HomePage(selectedIndex: 2);
-      },
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +103,11 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
         });
   }
 
+  Future<void> checkBoxTapped(bool? value, int index) async {
+    await DailyQuestService().completeTask(index, value);
+    setState(() {});
+  }
+
   void addNewQuestDialog() async {
     showDialog(
         context: context,
@@ -124,12 +119,9 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
               onYesPressed: () async {
                 await DailyQuestService().addNewDailyQuest(textController.text);
                 textController.clear();
-                if (!mounted) return;
-                Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, _) {
-                    return const HomePage(selectedIndex: 2);
-                  },
-                ));
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               },
               onNoPressed: () {
                 textController.clear();
@@ -151,12 +143,9 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                 await DailyQuestService()
                     .editDailyQuest(index, textController.text);
                 textController.clear();
-                if (!mounted) return;
-                Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, _) {
-                    return const HomePage(selectedIndex: 2);
-                  },
-                ));
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               },
               onNoPressed: () {
                 textController.clear();
@@ -174,12 +163,9 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
               onYesPressed: () async {
                 await DailyQuestService().deleteQuest(index);
                 textController.clear();
-                if (!mounted) return;
-                Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, _) {
-                    return const HomePage(selectedIndex: 2);
-                  },
-                ));
+                setState(() {
+                  Navigator.of(context).pop();
+                });
               },
               onNoPressed: () {
                 Navigator.of(context).pop();

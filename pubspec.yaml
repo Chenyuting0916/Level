@@ -59,6 +59,7 @@ dependencies:
   firebase_auth: ^4.13.0
   table_calendar: ^3.0.9
   liquid_pull_to_refresh: ^3.0.1
+  collection: ^1.18.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
