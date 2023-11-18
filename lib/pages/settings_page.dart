@@ -8,7 +8,7 @@ import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
 import 'package:level/services/ad_mob_service.dart';
-import 'package:level/services/local_storage_service.dart';
+import 'package:level/theme/theme.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _isLightMode = LocalStorageService().getData("LightMode");
   late AdMobService _adMobService;
   RewardedAd? _rewardedAd;
 
@@ -43,11 +42,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 titleIcon: const Icon(Icons.settings)),
             const MyDivider(),
             SwitchListTile.adaptive(
-              value: _isLightMode,
+              value: Provider.of<ThemeProvider>(context, listen: false).themeData == lightMode,
               onChanged: (newValue) async {
+                
                 Provider.of<ThemeProvider>(context, listen: false)
                     .toggleTheme();
-                _isLightMode = !_isLightMode;
               },
               title: Text(
                 'LightTheme'.i18n(),
