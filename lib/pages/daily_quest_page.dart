@@ -5,9 +5,11 @@ import 'package:level/components/my_dialog.dart';
 import 'package:level/components/my_dialog_with_textfield.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_hint.dart';
-import 'package:level/components/my_title.dart';
+import 'package:level/components/my_titile_dropdown.dart';
 import 'package:level/components/quest_tile.dart';
 import 'package:level/models/daily_quests.dart';
+import 'package:level/models/title_dropdown.dart';
+import 'package:level/pages/home_page.dart';
 import 'package:level/pages/plan_page.dart';
 import 'package:level/services/daily_quest_service.dart';
 import 'package:localization/localization.dart';
@@ -40,11 +42,16 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
 
             return Scaffold(
               body: Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 60),
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 45),
                 child: Column(children: [
-                  MyTitle(
-                      title: "DailyQuest".i18n(),
-                      titleIcon: const Icon(Icons.task)),
+                  MyTitleWithDropDown(
+                    currentTitleValue: "DailyQuest",
+                    titleIcon: const Icon(Icons.task),
+                    titleDropdown: [
+                      TitleDropDown(value: "DailyQuest", name: "DailyQuest".i18n(), jumpPage: const HomePage(selectedIndex: 2)),
+                      TitleDropDown(value: "FuturePlan", name: "FuturePlan".i18n(), jumpPage: const PlanPage()),
+                    ],
+                  ),
                   const MyDivider(),
                   MonthlySummary(datasets: dailyQuests.datasets),
                   Expanded(
