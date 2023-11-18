@@ -56,6 +56,18 @@ class _MyRankHeaderState extends State<MyRankHeader> {
                       filterName: category.databaseName,
                     );
                   }),
+                  MyRankCategory(
+                    categoryName: 'weekStudySeconds',
+                    isSelected: isSelected('weekStudySeconds'),
+                    onTap: widget.onTap,
+                    filterName: 'weekStudySeconds',
+                  ),
+                  MyRankCategory(
+                    categoryName: 'monthStudySeconds',
+                    isSelected: isSelected('monthStudySeconds'),
+                    onTap: widget.onTap,
+                    filterName: 'monthStudySeconds',
+                  ),
                 ],
               ),
             ),
@@ -71,15 +83,23 @@ class _MyRankHeaderState extends State<MyRankHeader> {
 
   jumpToOffset() {
     scrollController = ScrollController(
-      initialScrollOffset: [
-        "luck",
-        "vitality",
-        "professionalSkill",
-        "financialQuotient"
-      ].contains(widget.currentSelected)
-          ? 200
-          : 0,
+      initialScrollOffset: getOffset(),
       keepScrollOffset: true,
     );
+  }
+
+  double getOffset() {
+    if (["monthStudySeconds", "weekStudySeconds"]
+        .contains(widget.currentSelected)) {
+      return 400;
+    } else if ([
+      "luck",
+      "vitality",
+      "professionalSkill",
+      "financialQuotient",
+    ].contains(widget.currentSelected)) {
+      return 200;
+    }
+    return 0;
   }
 }

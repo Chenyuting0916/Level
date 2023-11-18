@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:level/components/my_button.dart';
+import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_row_status.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
@@ -17,13 +18,17 @@ class RankUser extends StatelessWidget {
       child: ListTile(
           onTap: () async {
             var selectedUser = await UserService().getUser(user.userId);
+            final weekMinutes =
+                (selectedUser!.weekStudySeconds / 60).toStringAsFixed(2);
+            final monthMinutes =
+                (selectedUser.monthStudySeconds / 60).toStringAsFixed(2);
             if (!context.mounted) return;
             showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
                     title: Text(
-                      selectedUser!.username,
+                      selectedUser.username,
                       style: const TextStyle(fontSize: 18),
                     ),
                     content: Column(
@@ -53,6 +58,13 @@ class RankUser extends StatelessWidget {
                         MyRowStatus(
                             statusName: "FQ".i18n(),
                             status: selectedUser.financialQuotient),
+                        const MyDivider(),
+                        Text(
+                          "MonthTimeSpend".i18n([monthMinutes]),
+                        ),
+                        Text(
+                          "WeekTimeSpend".i18n([weekMinutes]),
+                        ),
                       ],
                     ),
                     actions: [

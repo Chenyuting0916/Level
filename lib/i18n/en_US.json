@@ -63,5 +63,7 @@
     "Time": "Time",
     "FuturePlan": "Future Plan",
     "EnterYourPlan": "Enter Your Plan",
-    "SureToDeleteEvent": "Are you sure you want to delete the event?"
+    "SureToDeleteEvent": "Are you sure you want to delete the event?",
+    "weekStudySeconds": "this week",
+    "monthStudySeconds": "this month"
 }

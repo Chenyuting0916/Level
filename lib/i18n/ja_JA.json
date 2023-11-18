@@ -63,5 +63,7 @@
     "Time": "時間",
     "FuturePlan": "未来の計画",
     "EnterYourPlan": "その日にやることを入力",
-    "SureToDeleteEvent": "イベントを削除してもよろしいですか？"
+    "SureToDeleteEvent": "イベントを削除してもよろしいですか？",
+    "weekStudySeconds": "今週の学習時間",
+    "monthStudySeconds": "今月の学習時間"
 }
