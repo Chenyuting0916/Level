@@ -60,6 +60,7 @@ dependencies:
   table_calendar: ^3.0.9
   liquid_pull_to_refresh: ^3.0.1
   collection: ^1.17.2
+  google_sign_in: ^6.1.6
 
 flutter_launcher_icons:
   android: "launcher_icon"

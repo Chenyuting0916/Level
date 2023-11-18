@@ -8,6 +8,7 @@ import 'package:level/components/my_title.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
 import 'package:level/services/ad_mob_service.dart';
+import 'package:level/services/auth_service.dart';
 import 'package:level/theme/theme.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
@@ -42,9 +43,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 titleIcon: const Icon(Icons.settings)),
             const MyDivider(),
             SwitchListTile.adaptive(
-              value: Provider.of<ThemeProvider>(context, listen: false).themeData == lightMode,
+              value: Provider.of<ThemeProvider>(context, listen: false)
+                      .themeData ==
+                  lightMode,
               onChanged: (newValue) async {
-                
                 Provider.of<ThemeProvider>(context, listen: false)
                     .toggleTheme();
               },
@@ -84,18 +86,18 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 20,
             ),
-            Text(
-              "BindAccount".i18n(),
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyButton(
-              buttonChild: Text("SignInWithGoogle".i18n()),
-              onPressed: () {},
-              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
-            ),
+            // Text(
+            //   "BindAccount".i18n(),
+            //   style: const TextStyle(fontSize: 18),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
+            // MyButton(
+            //   buttonChild: Text("SignInWithGoogle".i18n()),
+            //   onPressed: () => signInGoogle(),
+            //   buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            // ),
           ],
         ),
       ),
@@ -170,5 +172,9 @@ class _SettingsPageState extends State<SettingsPage> {
         //reward user here
       }));
     }
+  }
+
+  signInGoogle() async {
+    await AuthService().signInWithGoogle();
   }
 }
