@@ -150,7 +150,7 @@ class _PlanPageState extends State<PlanPage> {
         builder: (context) {
           return MyDialogWithTextField(
               controller: textController,
-              title: "EnterYourPlan".i18n(),
+              title: "${"EnterYourPlan".i18n()}\n(${_selectedDay.toString().substring(0,10)})",
               hintText: "EnterYourPlan".i18n(),
               onYesPressed: () async {
                 await PlanEventService()
