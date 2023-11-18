@@ -25,6 +25,7 @@ class MyTitleWithDropDown extends StatelessWidget {
             )
           ],
           onChanged: (value) {
+            if (value == currentTitleValue) return;
             Navigator.of(context).push(PageRouteBuilder(
               pageBuilder: (context, animation, _) {
                 return titleDropdown
