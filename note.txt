@@ -1,0 +1,4 @@
+keytool -genkey -v -keystore E:\000Personal\Flutter\Level\level\Level.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+flutter build appbundle      
+
+E:\000Personal\Flutter\Level\level\android\app\Level.jks
