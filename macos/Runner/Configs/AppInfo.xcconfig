@@ -8,7 +8,7 @@
 PRODUCT_NAME = level
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.level
+PRODUCT_BUNDLE_IDENTIFIER = com.inosisi.level
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.inosisi.level. All rights reserved.

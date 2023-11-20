@@ -1,4 +1,4 @@
-package com.example.level
+package com.inosisi.level
 
 import io.flutter.embedding.android.FlutterActivity
 

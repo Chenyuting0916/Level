@@ -66,7 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '493630785851',
     projectId: 'level-36ac1',
     storageBucket: 'level-36ac1.appspot.com',
-    iosBundleId: 'com.example.level',
+    iosBundleId: 'com.inosisi.level',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -75,6 +75,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '493630785851',
     projectId: 'level-36ac1',
     storageBucket: 'level-36ac1.appspot.com',
-    iosBundleId: 'com.example.level.RunnerTests',
+    iosBundleId: 'com.inosisi.level.RunnerTests',
   );
 }

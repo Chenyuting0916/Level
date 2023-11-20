@@ -5,6 +5,7 @@ import 'package:level/components/my_hint.dart';
 import 'package:level/models/language.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
+import 'package:level/pages/store_page.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
 import 'package:level/services/ad_mob_service.dart';
@@ -140,7 +141,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future fetchOffers() async {
-    // final allOffers = await PurchaseApi.fetchOffers();
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const StorePage()));
   }
 
   void _createRewardAd() {
