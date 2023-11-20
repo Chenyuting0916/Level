@@ -6,6 +6,8 @@ import 'package:level/pages/ranking_page.dart';
 import 'package:level/pages/settings_page.dart';
 import 'package:level/pages/timer_page.dart';
 import 'package:level/services/daily_quest_service.dart';
+import 'package:level/services/fake_scheduler_service.dart';
+import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,7 +36,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   Future<void> _navigateBottomBar(int index) async {
+    await UserService().updateLoginDay();
+    await FakeSchedulerService().resetDataIfNeeded();
     await DailyQuestService().clearYesterdayCompletedDailyQuest();
+
     setState(() {
       _selectedIndex = index;
     });
