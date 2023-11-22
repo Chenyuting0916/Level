@@ -1,13 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:level/components/my_appbar.dart';
+import 'package:level/components/my_button.dart';
+import 'package:level/services/in_app_purchase_service.dart';
 import 'package:localization/localization.dart';
 
-const List<String> _projectIds = <String>[
-  'premium_level',
-  "premium_level2",
-  "premium monthly"
-];
+const List<String> _projectIds = <String>['premium_level', "premium_monthly"];
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -17,6 +17,7 @@ class StorePage extends StatefulWidget {
 }
 
 class _StorePageState extends State<StorePage> {
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   bool _isAvailable = false;
   String? _notice;
@@ -26,6 +27,15 @@ class _StorePageState extends State<StorePage> {
   void initState() {
     super.initState();
     initStoreInfo();
+    final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
+
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      InAppPurchaseService().listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      _subscription.cancel();
+    }) as StreamSubscription<List<PurchaseDetails>>;
   }
 
   Future<void> initStoreInfo() async {
@@ -81,15 +91,43 @@ class _StorePageState extends State<StorePage> {
               child: ListView.builder(
             itemBuilder: (context, index) {
               final ProductDetails productDetails = _products[index];
+              final PurchaseParam purchaseParam =
+                  PurchaseParam(productDetails: productDetails);
 
               return Card(
-                child: Column(
+                child: Row(
                   children: [
-                    Text(
-                      productDetails.title,
-                      style: Theme.of(context).textTheme.headline5,
+                    _getIAPIcon(productDetails.id),
+                    const SizedBox(
+                      width: 8,
                     ),
-                    Text(productDetails.description)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          productDetails.title.length > 15
+                              ? productDetails.title.substring(0, 15)
+                              : productDetails.title,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: MyButton(
+                          buttonChild: _buyText(productDetails),
+                          onPressed: () {
+                            if (productDetails.id == "") {
+                              InAppPurchase.instance
+                                  .buyConsumable(purchaseParam: purchaseParam);
+                            } else {
+                              InAppPurchase.instance
+                                  .buyConsumable(purchaseParam: purchaseParam);
+                            }
+                          },
+                          buttonBackgroundColor:
+                              Theme.of(context).colorScheme.secondary),
+                    )
                   ],
                 ),
               );
@@ -102,11 +140,20 @@ class _StorePageState extends State<StorePage> {
   }
 
   Widget _getIAPIcon(productId) {
-    if (productId == "") {
-      return Icon(Icons.brightness_7_outlined);
+    if (productId == "premium_level") {
+      return const Icon(Icons.brightness_7_outlined);
+    } else if (productId == "premium_monthly") {
+      return const Icon(Icons.brightness_5);
+    } else {
+      return const Icon(Icons.post_add_outlined);
     }
-    else{
-      return Icon(Icons.brightness_7_outlined);
+  }
+
+  _buyText(ProductDetails productDetails) {
+    if (productDetails.id == "premium_monthly") {
+      return Text("${productDetails.price} / month");
+    } else {
+      return Text("buy for ${productDetails.price}");
     }
   }
 }
