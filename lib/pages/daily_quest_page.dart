@@ -7,11 +7,12 @@ import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_hint.dart';
 import 'package:level/components/my_titile_dropdown.dart';
 import 'package:level/components/quest_tile.dart';
-import 'package:level/models/daily_quests.dart';
 import 'package:level/models/title_dropdown.dart';
+import 'package:level/models/todolist.dart';
 import 'package:level/pages/home_page.dart';
 import 'package:level/pages/plan_page.dart';
 import 'package:level/services/daily_quest_service.dart';
+import 'package:level/services/todolist_service.dart';
 import 'package:localization/localization.dart';
 
 class DailyQuestPage extends StatefulWidget {
@@ -28,8 +29,8 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<DailyQuests?>(
-        future: DailyQuestService().getDailyQuest(),
+    return FutureBuilder<TodoList?>(
+        future: TodoListService().getTodoList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -38,7 +39,7 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
           } else if (snapshot.hasError) {
             return Text("Error: ${snapshot.error}");
           } else if (snapshot.hasData) {
-            final dailyQuests = snapshot.data!;
+            final dailyQuests = snapshot.data!.dailyQuests!;
 
             return Scaffold(
               body: Padding(
@@ -48,9 +49,16 @@ class _DailyQuestPageState extends State<DailyQuestPage> {
                     currentTitleValue: "DailyQuest",
                     titleIcon: const Icon(Icons.task),
                     titleDropdown: [
-                      TitleDropDown(value: "DailyQuest", name: "DailyQuest".i18n(), jumpPage: const HomePage(selectedIndex: 2)),
-                      TitleDropDown(value: "FuturePlan", name: "FuturePlan".i18n(), jumpPage: const PlanPage()),
+                      TitleDropDown(
+                          value: "DailyQuest",
+                          name: "DailyQuest".i18n(),
+                          jumpPage: const HomePage(selectedIndex: 2)),
+                      TitleDropDown(
+                          value: "FuturePlan",
+                          name: "FuturePlan".i18n(),
+                          jumpPage: const PlanPage()),
                     ],
+                    todoList: snapshot.data!,
                   ),
                   const MyDivider(),
                   MonthlySummary(datasets: dailyQuests.datasets),
