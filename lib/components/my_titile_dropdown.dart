@@ -63,13 +63,12 @@ class MyTitleWithDropDown extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Text(
-                      "TodoList".i18n(),
-                      style: const TextStyle(fontSize: 18),
-                    ),
+                    title: Text("TodoList".i18n(),),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        if (inCompleteDailyLength + inCompletePlanLength == 0)
+                          Text("Congratulation".i18n()),
                         if (inCompleteDailyLength > 0)
                           Text("InCompleteDaily".i18n()),
                         ...inCompleteDaily!.map((e) => Container(

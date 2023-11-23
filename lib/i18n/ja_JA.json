@@ -67,5 +67,6 @@
     "weekStudySeconds": "今週の学習時間",
     "monthStudySeconds": "今月の学習時間",
     "TodoList": "タスクリスト",
-    "InCompleteDaily": "未完了のデイリーミッション:"
+    "InCompleteDaily": "未完了のデイリーミッション:",
+    "Congratulation": "おめでとうございます。今日やるべきことが完了しました :)"
 }

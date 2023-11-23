@@ -67,5 +67,6 @@
     "weekStudySeconds": "Week",
     "monthStudySeconds": "Month",
     "TodoList": "Todo List",
-    "InCompleteDaily": "InComplete Daily Quest:"
+    "InCompleteDaily": "InComplete Daily Quest:",
+    "Congratulation": "Congratulations! You've completed today's tasks :)"
 }
