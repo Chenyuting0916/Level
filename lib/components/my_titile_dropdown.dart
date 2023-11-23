@@ -71,7 +71,7 @@ class MyTitleWithDropDown extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (inCompleteDailyLength > 0)
-                          Text("InCompleteDaily:".i18n()),
+                          Text("InCompleteDaily".i18n()),
                         ...inCompleteDaily!.map((e) => Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
