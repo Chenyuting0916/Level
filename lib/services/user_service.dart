@@ -40,17 +40,19 @@ class UserService {
     return await getUser(userId);
   }
 
-Future<List<MyUser>> getRankedUsers(String filter) async {
-  List<QueryDocumentSnapshot> docs = await _firestore
-      .collection('users')
-      .orderBy(filter, descending: true)
-      .limit(10)
-      .get()
-      .then((QuerySnapshot snapshot) => snapshot.docs);
+  Future<List<MyUser>> getRankedUsers(String filter) async {
+    List<QueryDocumentSnapshot> docs = await _firestore
+        .collection('users')
+        .orderBy(filter, descending: true)
+        .limit(10)
+        .get()
+        .then((QuerySnapshot snapshot) => snapshot.docs);
 
-  List<MyUser> users = docs.map((doc) => MyUser.fromJson(doc.data() as Map<String, dynamic>)).toList();
-  return users;
-}
+    List<MyUser> users = docs
+        .map((doc) => MyUser.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+    return users;
+  }
 
   Future updateUser(Map<String, dynamic> updateData) async {
     final snapshot = _firestore.collection('users').doc(userId);
@@ -82,5 +84,16 @@ Future<List<MyUser>> getRankedUsers(String filter) async {
       return MyUser.fromJson(snapshot.data()!);
     }
     return null;
+  }
+
+  Future<int> getSelfRank(String filter) async {
+    var self = await getCurrentUser();
+    var docs = await _firestore
+        .collection('users')
+        .where(filter, isGreaterThanOrEqualTo: self!.getProperty(filter))
+        .get()
+        .then((QuerySnapshot snapshot) => snapshot.docs);
+
+    return docs.toList().length;
   }
 }

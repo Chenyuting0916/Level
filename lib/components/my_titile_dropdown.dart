@@ -78,7 +78,7 @@ class MyTitleWithDropDown extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Text(e.dailyQuestName))),
-                        if (inCompleteDailyLength > 0) const MyDivider(),
+                        if (inCompleteDailyLength > 0 && inCompletePlanLength > 0) const MyDivider(),
                         if (inCompletePlanLength > 0)
                           Text(
                               "${DateTime.now().toString().substring(0, 10)}:"),

@@ -3,6 +3,7 @@ import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_rank_header.dart';
 import 'package:level/components/my_title.dart';
 import 'package:level/components/rank_user.dart';
+import 'package:level/components/self_rank.dart';
 import 'package:level/models/user.dart';
 import 'package:level/services/user_service.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -35,25 +36,36 @@ class _RankingPageState extends State<RankingPage> {
             } else if (snapshot.hasData) {
               final rankedUsers = snapshot.data!;
 
-              return Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-                child: ListView(
-                  children: [
-                    MyTitle(
-                        title: "Rank".i18n(),
-                        titleIcon: const Icon(Icons.bar_chart_outlined)),
-                    const MyDivider(),
-                    MyRankHeader(
-                      onTap: changeFilter,
-                      currentSelected: filter,
+              return Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 30, right: 30, top: 30),
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        children: [
+                          MyTitle(
+                              title: "Rank".i18n(),
+                              titleIcon: const Icon(Icons.bar_chart_outlined)),
+                          const MyDivider(),
+                          MyRankHeader(
+                            onTap: changeFilter,
+                            currentSelected: filter,
+                          ),
+                          ...rankedUsers
+                              .map((user) => RankUser(
+                                    user: user,
+                                  ))
+                              .toList(),
+                        ],
+                      ),
                     ),
-                    ...rankedUsers
-                        .map((user) => RankUser(
-                              user: user,
-                            ))
-                        .toList(),
-                  ],
-                ),
+                  ),
+                  SelfRank(
+                    filter: filter,
+                  ),
+                ],
               );
             } else {
               return Padding(

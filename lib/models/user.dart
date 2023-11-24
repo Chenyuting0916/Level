@@ -80,4 +80,25 @@ class MyUser {
       imageUrl: json['imageUrl'] ?? "",
       weekStudySeconds: json['weekStudySeconds'] ?? 0,
       monthStudySeconds: json['monthStudySeconds'] ?? 0);
+
+  dynamic getProperty(String key) => <String, dynamic>{
+        "userId": userId,
+        "username": username,
+        "level": level,
+        "exp": exp,
+        "strength": strength,
+        "wisdom": wisdom,
+        "intelligence": intelligence,
+        "vitality": vitality,
+        "agility": agility,
+        "professionalSkill": professionalSkill,
+        "luck": luck,
+        "financialQuotient": financialQuotient,
+        "seconds": seconds,
+        "loginDays": loginDays,
+        "lastLoginDay": lastLoginDay,
+        "imageUrl": imageUrl,
+        "monthStudySeconds": monthStudySeconds,
+        "weekStudySeconds": weekStudySeconds
+      }[key];
 }
