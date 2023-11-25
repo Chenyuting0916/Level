@@ -71,7 +71,9 @@ class _PlanPageState extends State<PlanPage> {
                         return Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Theme.of(context).colorScheme.tertiary),
+                              color: hasIncomplete(date)
+                                  ? Theme.of(context).colorScheme.tertiary
+                                  : Colors.green,),
                           width: 5.0,
                           height: 5.0,
                           margin: const EdgeInsets.symmetric(horizontal: 1.5),
@@ -150,7 +152,8 @@ class _PlanPageState extends State<PlanPage> {
         builder: (context) {
           return MyDialogWithTextField(
               controller: textController,
-              title: "${"EnterYourPlan".i18n()}\n(${_selectedDay.toString().substring(0,10)})",
+              title:
+                  "${"EnterYourPlan".i18n()}\n(${_selectedDay.toString().substring(0, 10)})",
               hintText: "EnterYourPlan".i18n(),
               onYesPressed: () async {
                 await PlanEventService()
@@ -222,5 +225,13 @@ class _PlanPageState extends State<PlanPage> {
       return thisDayEvents;
     }
     return [];
+  }
+
+  hasIncomplete(DateTime date) {
+    return events
+        .where((element) =>
+            isSameDay(element.eventDate, date) && !element.isCompleted)
+        .toList()
+        .isNotEmpty;
   }
 }
