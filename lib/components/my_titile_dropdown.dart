@@ -71,13 +71,16 @@ class MyTitleWithDropDown extends StatelessWidget {
                           Text("Congratulation".i18n()),
                         if (inCompleteDailyLength > 0)
                           Text("InCompleteDaily".i18n()),
-                        ...inCompleteDaily!.map((e) => Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Text(e.dailyQuestName))),
+                        ...inCompleteDaily!.map((e) => Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Text(e.dailyQuestName)),
+                        )),
                         if (inCompleteDailyLength > 0 && inCompletePlanLength > 0) const MyDivider(),
                         if (inCompletePlanLength > 0)
                           Text(
@@ -90,14 +93,17 @@ class MyTitleWithDropDown extends StatelessWidget {
                                   },
                                 ));
                               },
-                              child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Text(e.eventName)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).colorScheme.secondary,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Text(e.eventName)),
+                              ),
                             )),
                       ],
                     ),
