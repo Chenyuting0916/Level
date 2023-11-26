@@ -20,7 +20,6 @@ class _StorePageState extends State<StorePage> {
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   bool _isAvailable = false;
-  String? _notice;
   List<ProductDetails> _products = [];
 
   @override
@@ -44,15 +43,8 @@ class _StorePageState extends State<StorePage> {
       _isAvailable = isAvailable;
     });
     if (!_isAvailable) {
-      setState(() {
-        _notice = "There is no upgrades at this time";
-      });
       return;
     }
-
-    setState(() {
-      _notice = "There is a connection to the store";
-    });
 
     ProductDetailsResponse productDetailsResponse =
         await _inAppPurchase.queryProductDetails(_projectIds.toSet());
@@ -61,14 +53,7 @@ class _StorePageState extends State<StorePage> {
     });
 
     if (productDetailsResponse.error != null) {
-      setState(() {
-        _notice = "There was a problem connecting to store.";
-      });
-    } else if (productDetailsResponse.productDetails.isEmpty) {
-      setState(() {
-        _notice = "There is no products at this time";
-      });
-    }
+    } else if (productDetailsResponse.productDetails.isEmpty) {}
   }
 
   @override
@@ -80,61 +65,56 @@ class _StorePageState extends State<StorePage> {
             Navigator.of(context).pop();
           }),
       body: SafeArea(
-          child: Column(
-        children: [
-          if (_notice != null)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(_notice!),
-            ),
-          Expanded(
-              child: ListView.builder(
-            itemBuilder: (context, index) {
-              final ProductDetails productDetails = _products[index];
-              final PurchaseParam purchaseParam =
-                  PurchaseParam(productDetails: productDetails);
+          child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView.builder(
+              itemBuilder: (context, index) {
+                final ProductDetails productDetails = _products[index];
+                final PurchaseParam purchaseParam =
+                    PurchaseParam(productDetails: productDetails);
 
-              return Card(
-                child: Row(
-                  children: [
-                    _getIAPIcon(productDetails.id),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          productDetails.title.length > 15
-                              ? productDetails.title.substring(0, 15)
-                              : productDetails.title,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MyButton(
-                          buttonChild: _buyText(productDetails),
-                          onPressed: () {
-                            if (productDetails.id == "") {
-                              InAppPurchase.instance
-                                  .buyConsumable(purchaseParam: purchaseParam);
-                            } else {
-                              InAppPurchase.instance
-                                  .buyConsumable(purchaseParam: purchaseParam);
-                            }
-                          },
-                          buttonBackgroundColor:
-                              Theme.of(context).colorScheme.secondary),
-                    )
-                  ],
-                ),
-              );
-            },
-            itemCount: _products.length,
-          )),
-        ],
+                return Card(
+                  child: Row(
+                    children: [
+                      _getIAPIcon(productDetails.id),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        productDetails.title.length > 15
+                            ? productDetails.title.substring(0, 15)
+                            : productDetails.title,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: MyButton(
+                            buttonChild: _buyText(productDetails),
+                            onPressed: () {
+                              if (productDetails.id == "premium_level") {
+                                InAppPurchase.instance.buyNonConsumable(
+                                    purchaseParam: purchaseParam);
+                              } else {
+                                InAppPurchase.instance.buyConsumable(
+                                    purchaseParam: purchaseParam);
+                              }
+                            },
+                            buttonBackgroundColor:
+                                Theme.of(context).colorScheme.secondary),
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: _products.length,
+            )),
+            _buildRestoreButton(),
+          ],
+        ),
       )),
     );
   }
@@ -155,5 +135,17 @@ class _StorePageState extends State<StorePage> {
     } else {
       return Text("buy for ${productDetails.price}");
     }
+  }
+
+  Widget _buildRestoreButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        TextButton(
+            onPressed: () => _inAppPurchase.restorePurchases(),
+            child: Text("RestorePurchase".i18n()))
+      ],
+    );
   }
 }
