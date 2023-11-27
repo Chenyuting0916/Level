@@ -17,6 +17,7 @@ class MyUser {
   final String imageUrl;
   final int weekStudySeconds;
   final int monthStudySeconds;
+  final bool premium;
 
   MyUser(
       {required this.userId,
@@ -36,7 +37,8 @@ class MyUser {
       required this.lastLoginDay,
       required this.imageUrl,
       required this.weekStudySeconds,
-      required this.monthStudySeconds});
+      required this.monthStudySeconds,
+      required this.premium});
 
   Map<String, dynamic> toMap() {
     return {
@@ -57,7 +59,8 @@ class MyUser {
       "lastLoginDay": lastLoginDay,
       "imageUrl": imageUrl,
       "monthStudySeconds": monthStudySeconds,
-      "weekStudySeconds": weekStudySeconds
+      "weekStudySeconds": weekStudySeconds,
+      "premium": premium
     };
   }
 
@@ -79,7 +82,8 @@ class MyUser {
       lastLoginDay: json['lastLoginDay']?.toDate() ?? DateTime.now(),
       imageUrl: json['imageUrl'] ?? "",
       weekStudySeconds: json['weekStudySeconds'] ?? 0,
-      monthStudySeconds: json['monthStudySeconds'] ?? 0);
+      monthStudySeconds: json['monthStudySeconds'] ?? 0,
+      premium: json['premium'] ?? false);
 
   dynamic getProperty(String key) => <String, dynamic>{
         "userId": userId,

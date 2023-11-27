@@ -30,7 +30,8 @@ class UserService {
           lastLoginDay: DateTime.now(),
           imageUrl: "",
           weekStudySeconds: 0,
-          monthStudySeconds: 0);
+          monthStudySeconds: 0,
+          premium: false);
 
       await _firestore.collection("users").doc(userId).set(user.toMap());
     }
