@@ -12,7 +12,28 @@
           "package_name": "com.inosisi.level"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "493630785851-lrd6tvqd51fm77cvp3q67j9lgg1sben0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inosisi.level",
+            "certificate_hash": "74e226318631e8769b4397ad2dc174a299b42cc2"
+          }
+        },
+        {
+          "client_id": "493630785851-mmgfid2dh3gucv008p05p4avcjvfkmq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.inosisi.level",
+            "certificate_hash": "ed6934613daf2a8d79699e9428fd457dabc5f869"
+          }
+        },
+        {
+          "client_id": "493630785851-dkh6im1op2eoqam9e5vjl9gq8t2c0pn2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBhpsNjcbWBqYAasv4n3IcZtBT7Rn3JYHA"
@@ -20,7 +41,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493630785851-dkh6im1op2eoqam9e5vjl9gq8t2c0pn2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "493630785851-l8b21u0uefgnttg0lbb3d5j8ggioi9lu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.inosisi.level"
+              }
+            }
+          ]
         }
       }
     }

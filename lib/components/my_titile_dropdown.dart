@@ -86,32 +86,8 @@ class MyTitleWithDropDown extends StatelessWidget {
                           Text("Congratulation".i18n()),
                         if (inCompleteDailyLength > 0)
                           Text("InCompleteDaily".i18n()),
-                        ...inCompleteDaily!.map((e) => Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Text(e.dailyQuestName)),
-                            )),
-                        if (inCompleteDailyLength > 0 &&
-                            inCompletePlanLength > 0)
-                          const MyDivider(),
-                        if (inCompletePlanLength > 0)
-                          Text(
-                              "${DateTime.now().toString().substring(0, 10)}:"),
-                        ...inCompletePlan!.map((e) => InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(PageRouteBuilder(
-                                  pageBuilder: (context, animation, _) {
-                                    return const PlanPage();
-                                  },
-                                ));
-                              },
-                              child: Padding(
+                        if (inCompleteDailyLength > 0)
+                          ...inCompleteDaily!.map((e) => Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: Container(
                                     padding: const EdgeInsets.all(8),
@@ -121,9 +97,37 @@ class MyTitleWithDropDown extends StatelessWidget {
                                           .secondary,
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    child: Text(e.eventName)),
-                              ),
-                            )),
+                                    child: Text(e.dailyQuestName)),
+                              )),
+                        if (inCompleteDailyLength > 0 &&
+                            inCompletePlanLength > 0)
+                          const MyDivider(),
+                        if (inCompletePlanLength > 0)
+                          Text(
+                              "${DateTime.now().toString().substring(0, 10)}:"),
+                        if (inCompletePlanLength > 0)
+                          ...inCompletePlan!.map((e) => InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(PageRouteBuilder(
+                                    pageBuilder: (context, animation, _) {
+                                      return const PlanPage();
+                                    },
+                                  ));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Text(e.eventName)),
+                                ),
+                              )),
                       ],
                     ),
                   ));

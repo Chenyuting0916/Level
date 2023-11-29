@@ -87,18 +87,31 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 20,
             ),
-            // Text(
-            //   "BindAccount".i18n(),
-            //   style: const TextStyle(fontSize: 18),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
+            Text(
+              "BindAccount".i18n(),
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             // MyButton(
             //   buttonChild: Text("SignInWithGoogle".i18n()),
             //   onPressed: () => signInGoogle(),
             //   buttonBackgroundColor: Theme.of(context).colorScheme.primary,
             // ),
+            MyButton(
+              buttonChild: Text("LinkAccountWithEmail".i18n()),
+              onPressed: () => AuthService().signInWithEmail('chenyuting0916@hotmail.com ','qaz123456'),
+              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            MyButton(
+              buttonChild: Text("LoginExistedAccount".i18n()),
+              onPressed: () => AuthService().login(),
+              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            ),
           ],
         ),
       ),

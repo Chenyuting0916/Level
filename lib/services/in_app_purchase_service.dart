@@ -3,13 +3,14 @@ import 'package:level/services/user_service.dart';
 
 class InAppPurchaseService {
   void listenToPurchaseUpdated(List<PurchaseDetails> productDetails) {
+    // ignore: avoid_function_literals_in_foreach_calls
     productDetails.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         await _handleSuccessfulPurchase(purchaseDetails);
       }
       if (purchaseDetails.status == PurchaseStatus.error) {
-        print(purchaseDetails.error!);
+        //error handle
       }
       if (purchaseDetails.pendingCompletePurchase) {
         await InAppPurchase.instance.completePurchase(purchaseDetails);
