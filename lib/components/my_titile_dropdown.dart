@@ -60,10 +60,25 @@ class MyTitleWithDropDown extends StatelessWidget {
       const Spacer(),
       InkWell(
         onTap: () {
+          Navigator.of(context).push(PageRouteBuilder(
+            pageBuilder: (context, animation, _) {
+              return const PlanPage();
+            },
+          ));
+        },
+        child: const Icon(Icons.calendar_month_rounded),
+      ),
+      const SizedBox(
+        width: 20,
+      ),
+      InkWell(
+        onTap: () {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Text("TodoList".i18n(),),
+                    title: Text(
+                      "TodoList".i18n(),
+                    ),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -72,16 +87,19 @@ class MyTitleWithDropDown extends StatelessWidget {
                         if (inCompleteDailyLength > 0)
                           Text("InCompleteDaily".i18n()),
                         ...inCompleteDaily!.map((e) => Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Text(e.dailyQuestName)),
-                        )),
-                        if (inCompleteDailyLength > 0 && inCompletePlanLength > 0) const MyDivider(),
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Text(e.dailyQuestName)),
+                            )),
+                        if (inCompleteDailyLength > 0 &&
+                            inCompletePlanLength > 0)
+                          const MyDivider(),
                         if (inCompletePlanLength > 0)
                           Text(
                               "${DateTime.now().toString().substring(0, 10)}:"),
@@ -98,8 +116,9 @@ class MyTitleWithDropDown extends StatelessWidget {
                                 child: Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.secondary,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: Text(e.eventName)),
