@@ -5,6 +5,7 @@ import 'package:level/components/my_hint.dart';
 import 'package:level/models/language.dart';
 import 'package:level/components/my_divider.dart';
 import 'package:level/components/my_title.dart';
+import 'package:level/pages/login_page.dart';
 import 'package:level/pages/store_page.dart';
 import 'package:level/providers/locale_provider.dart';
 import 'package:level/providers/theme_provider.dart';
@@ -101,16 +102,14 @@ class _SettingsPageState extends State<SettingsPage> {
             // ),
             MyButton(
               buttonChild: Text("LinkAccountWithEmail".i18n()),
-              onPressed: () => AuthService().signInWithEmail('chenyuting0916@hotmail.com ','qaz123456'),
+              onPressed: () => {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()))
+              },
               buttonBackgroundColor: Theme.of(context).colorScheme.primary,
             ),
             const SizedBox(
               height: 20,
-            ),
-            MyButton(
-              buttonChild: Text("LoginExistedAccount".i18n()),
-              onPressed: () => AuthService().login(),
-              buttonBackgroundColor: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),

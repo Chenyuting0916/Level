@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:level/services/user_service.dart';
 import 'package:localization/localization.dart';
 
 class AuthService {
@@ -32,23 +33,62 @@ class AuthService {
   }
 
   signInWithEmail(String email, String password) async {
-    if (currentUser == null && currentUser!.isAnonymous) {
+    try {
       AuthCredential credential = EmailAuthProvider.credential(
         email: email,
         password: password,
       );
       await currentUser!.linkWithCredential(credential);
-    } else {
-      Fluttertoast.showToast(
-          msg: "AlreadyLinked".i18n(),
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.grey,
-          textColor: Colors.black,
-          fontSize: 16.0);
+      successMessage();
+    } on FirebaseAuthException catch (e) {
+      wrongMessage(e.code);
     }
   }
 
-  login() {}
+  void wrongMessage(String code) {
+    var displayMessage = '';
+    if (code == 'user-not-found') {
+      displayMessage = 'InCorrectEmail'.i18n();
+    } else if (code == 'wrong-password') {
+      displayMessage = 'IncorrectPassword'.i18n();
+    } else if (code == 'weak-password') {
+      displayMessage = 'WeakPassword'.i18n();
+    } else if (code == 'provider-already-linked') {
+      displayMessage = 'ProviderAlreadyLinked'.i18n();
+    } else {
+      displayMessage = code;
+    }
+    Fluttertoast.showToast(
+        msg: displayMessage,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.redAccent.shade700,
+        textColor: Colors.black,
+        fontSize: 16.0);
+  }
+
+  signoutAndLogin(String email, String password) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await UserService().createUserIfNotExist();
+    } on FirebaseAuthException catch (e) {
+      wrongMessage(e.code);
+    }
+    successMessage();
+  }
+
+  void successMessage() {
+    Fluttertoast.showToast(
+        msg: 'Success'.i18n(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.greenAccent.shade700,
+        textColor: Colors.black,
+        fontSize: 16.0);
+  }
 }
