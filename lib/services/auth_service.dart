@@ -51,6 +51,8 @@ class AuthService {
       displayMessage = 'InCorrectEmail'.i18n();
     } else if (code == 'wrong-password') {
       displayMessage = 'IncorrectPassword'.i18n();
+    } else if (code == 'invalid-email') {
+      displayMessage = 'InCorrectEmail'.i18n();
     } else if (code == 'weak-password') {
       displayMessage = 'WeakPassword'.i18n();
     } else if (code == 'provider-already-linked') {
@@ -75,10 +77,10 @@ class AuthService {
         password: password,
       );
       await UserService().createUserIfNotExist();
+      successMessage();
     } on FirebaseAuthException catch (e) {
       wrongMessage(e.code);
     }
-    successMessage();
   }
 
   void successMessage() {

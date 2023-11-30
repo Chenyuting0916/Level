@@ -68,5 +68,14 @@
     "monthStudySeconds": "今月の学習時間",
     "TodoList": "タスクリスト",
     "InCompleteDaily": "未完了のデイリーミッション:",
-    "Congratulation": "おめでとうございます。今日やるべきことが完了しました :)"
+    "Congratulation": "おめでとうございます。今日やるべきことが完了しました :)",
+    "Store": "ストア",
+    "LinkAccountWithEmail": "メールでアカウントをリンク",
+    "Success": "成功",
+    "Link": "リンク",
+    "LoginExistedAccount": "既存のアカウントでログイン",
+    "InCorrectEmail": "不正確なメールアドレス",
+    "IncorrectPassword": "パスワードが正しくありません",
+    "WeakPassword": "パスワードが弱いです。6文字以上必要です。",
+    "ProviderAlreadyLinked": "アカウントはすでにリンクされています"
 }

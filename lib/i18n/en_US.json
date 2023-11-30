@@ -68,5 +68,14 @@
     "monthStudySeconds": "Month",
     "TodoList": "Todo List",
     "InCompleteDaily": "InComplete Daily Quest:",
-    "Congratulation": "Congratulations! You've completed today's tasks :)"
+    "Congratulation": "Congratulations! You've completed today's tasks :)",
+    "Store": "Store",
+    "LinkAccountWithEmail": "Link Account With Email",
+    "Success": "Success",
+    "Link": "Link",
+    "LoginExistedAccount": "Login Existed Account",
+    "InCorrectEmail": "InCorrect Email",
+    "IncorrectPassword": "Incorrect Password",
+    "WeakPassword": "Weak Password, needs more than 6 characters",
+    "ProviderAlreadyLinked": "Account Already Linked"
 }

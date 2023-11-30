@@ -68,5 +68,14 @@
     "monthStudySeconds": "本月學習時間",
     "TodoList": "代辦事項清單",
     "InCompleteDaily": "尚未完成的每日任務:",
-    "Congratulation": "恭喜你完成今天該做的事 :)"
+    "Congratulation": "恭喜你完成今天該做的事 :)",
+    "Store": "商店",
+    "LinkAccountWithEmail": "用email綁定帳戶",
+    "Success": "成功",
+    "Link": "連結",
+    "LoginExistedAccount": "登入現有帳戶",
+    "InCorrectEmail": "Email不正確",
+    "IncorrectPassword": "密碼錯誤",
+    "WeakPassword": "密碼太弱，需要至少6個字元",
+    "ProviderAlreadyLinked": "帳戶已綁定過"
 }
