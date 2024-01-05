@@ -83,9 +83,7 @@ class _StorePageState extends State<StorePage> {
                         width: 8,
                       ),
                       Text(
-                        productDetails.title.length > 15
-                            ? productDetails.title.substring(0, 15)
-                            : productDetails.title,
+                        _buyTitleText(productDetails),
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const Spacer(),
@@ -146,5 +144,13 @@ class _StorePageState extends State<StorePage> {
             child: Text("RestorePurchase".i18n()))
       ],
     );
+  }
+
+  _buyTitleText(ProductDetails productDetails) {
+    if (productDetails.id == "premium_monthly") {
+      return "premium_monthly";
+    } else {
+      return "premium";
+    }
   }
 }
