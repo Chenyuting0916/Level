@@ -26,7 +26,10 @@ class MyCategory extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            categoryIcon,
+            Icon(
+              categoryIcon.icon, // 保留原本的 icon
+              color: Theme.of(context).colorScheme.inversePrimary, // 設定顏色，例如設定為藍色
+            ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
               child: Text(
