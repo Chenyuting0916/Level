@@ -54,10 +54,7 @@ class _MyTimerState extends State<MyTimer> {
     final seconds = toTwoDigits(duration.inSeconds.remainder(60));
     final hours = toTwoDigits(duration.inHours.remainder(60));
 
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
       child: Scaffold(
         appBar: MyAppbar(
             appbarTitle: "",

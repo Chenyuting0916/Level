@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return GNav(
         selectedIndex: _selectedIndex,
         onTabChange: _navigateBottomBar,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         gap: 4,
         haptic: true,
         padding: const EdgeInsets.all(16),
@@ -79,13 +79,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
       child: Scaffold(
         bottomNavigationBar: Container(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),

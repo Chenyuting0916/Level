@@ -37,10 +37,7 @@ class _FocusScorePageState extends State<FocusScorePage> {
         } else if (snapshot.hasData) {
           final user = snapshot.data!;
 
-          return WillPopScope(
-            onWillPop: () async {
-              return false;
-            },
+          return PopScope(
             child: Scaffold(
               appBar: MyAppbar(
                 appbarTitle: "BackToProfile".i18n(),

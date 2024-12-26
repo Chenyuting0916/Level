@@ -34,6 +34,12 @@ class RankUser extends StatelessWidget {
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Text(
+                          "MonthTimeSpend".i18n([monthMinutes]),
+                        ),
+                        Text(
+                          "WeekTimeSpend".i18n([weekMinutes]),
+                        ),
                         MyRowStatus(
                             statusName: "STR".i18n(),
                             status: selectedUser.strength),
@@ -59,12 +65,6 @@ class RankUser extends StatelessWidget {
                             statusName: "FQ".i18n(),
                             status: selectedUser.financialQuotient),
                         const MyDivider(),
-                        Text(
-                          "MonthTimeSpend".i18n([monthMinutes]),
-                        ),
-                        Text(
-                          "WeekTimeSpend".i18n([weekMinutes]),
-                        ),
                       ],
                     ),
                     actions: [
